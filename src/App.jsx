@@ -4,11 +4,7 @@ import Tour from "./pages/Tour";
 
 export default function App() {
   const [authenticated, setAuthenticated] =
-    useState(
-      localStorage.getItem(
-        "authenticated"
-      ) === "true"
-    );
+  useState(false);
 
   if (!authenticated) {
     return (

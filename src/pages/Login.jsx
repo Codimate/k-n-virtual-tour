@@ -15,10 +15,6 @@ export default function Login({ onLogin }) {
       userId === "admin" &&
       password === "admin123"
     ) {
-      localStorage.setItem(
-        "authenticated",
-        "true"
-      );
 
       onLogin();
     } else {
