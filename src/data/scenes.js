@@ -1,10 +1,10 @@
 export const scenes = {
-  warehouse: {
-    id: "warehouse",
+  skyview: {
+    id: "skyview",
 
-    title: "Warehouse",
+    title: "Sky View",
 
-    description: "Main warehouse area",
+    description: "K+N Facility Overview",
 
     image: "/panoramas/main1.JPG",
 
@@ -12,22 +12,27 @@ export const scenes = {
 
     hotspots: [
       {
-        id: "dock",
+        id: "docks",
+
         type: "scene",
-        label: "Go To Dock",
-        target: "dock",
-        yaw: 0.8,
-        pitch: 0,
+
+        label: "Docks",
+
+        target: "docks",
+
+        yaw: 0.036,
+
+        pitch: 0.868,
       },
     ],
   },
 
-  dock: {
-    id: "dock",
+  docks: {
+    id: "docks",
 
-    title: "Dock",
+    title: "Docks",
 
-    description: "Loading area",
+    description: "Dock Operations",
 
     image: "/panoramas/main2.JPG",
 
@@ -36,12 +41,31 @@ export const scenes = {
     hotspots: [
       {
         id: "warehouse",
+
         type: "scene",
-        label: "Back To Warehouse",
+
+        label: "Warehouse",
+
         target: "warehouse",
-        yaw: 0,
-        pitch: 0,
+
+        yaw: -0.256,
+
+        pitch: -0.016,
       },
     ],
+  },
+
+  warehouse: {
+    id: "warehouse",
+
+    title: "Warehouse",
+
+    description: "Warehouse Operations",
+
+    image: "/panoramas/main3.JPG",
+
+    thumbnail: "/panoramas/main3.JPG",
+
+    hotspots: [],
   },
 };
