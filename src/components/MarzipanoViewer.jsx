@@ -60,11 +60,16 @@ export default function MarzipanoViewer({
         document.createElement("div");
 
       hotspotElement.innerHTML = `
-        <div class="hotspot">
-          <div class="hotspot-dot"></div>
-          <span>${hotspot.label}</span>
-        </div>
-      `;
+  <div class="kn-hotspot">
+
+    <div class="kn-hotspot-label">
+      ${hotspot.label}
+    </div>
+
+    <div class="kn-hotspot-pointer"></div>
+
+  </div>
+`;
 
       hotspotElement.style.cursor =
         "pointer";

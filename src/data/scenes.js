@@ -8,6 +8,8 @@ export const scenes = {
 
     image: "/panoramas/main1.JPG",
 
+    thumbnail: "/panoramas/main1.JPG",
+
     hotspots: [
       {
         id: "dock",
@@ -15,9 +17,9 @@ export const scenes = {
         label: "Go To Dock",
         target: "dock",
         yaw: 0.8,
-        pitch: 0
-      }
-    ]
+        pitch: 0,
+      },
+    ],
   },
 
   dock: {
@@ -29,6 +31,8 @@ export const scenes = {
 
     image: "/panoramas/main2.JPG",
 
+    thumbnail: "/panoramas/main2.JPG",
+
     hotspots: [
       {
         id: "warehouse",
@@ -36,8 +40,8 @@ export const scenes = {
         label: "Back To Warehouse",
         target: "warehouse",
         yaw: 0,
-        pitch: 0
-      }
-    ]
-  }
+        pitch: 0,
+      },
+    ],
+  },
 };
