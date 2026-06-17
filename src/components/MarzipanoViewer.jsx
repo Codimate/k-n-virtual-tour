@@ -36,14 +36,14 @@ export default function MarzipanoViewer({
     const geometry =
       new Marzipano.EquirectGeometry([
         {
-          width: 2400,
+          width: 8000,
         },
       ]);
 
     const limiter =
       Marzipano.RectilinearView.limit.traditional(
-        1024,
-        (100 * Math.PI) / 180
+        4096,
+        (120 * Math.PI) / 180
       );
 
     const view =

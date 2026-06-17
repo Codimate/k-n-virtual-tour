@@ -16,8 +16,8 @@ export const scenes = {
         type: "scene",
         label: "KN CFS Polaris",
         target: "cfs",
-        yaw: 2.717,
-        pitch: 1.319,
+        yaw: 3.049,
+        pitch: 1.546,
       },
     ],
   },
@@ -48,8 +48,8 @@ export const scenes = {
         type: "scene",
         label: "Unloading Area",
         target: "unloading",
-        yaw: 0.5,
-        pitch: 0,
+        yaw: -1.114,
+        pitch: 0.007,
       },
 
       {
@@ -57,8 +57,8 @@ export const scenes = {
         type: "scene",
         label: "Documentation Room",
         target: "documentation",
-        yaw: 1.2,
-        pitch: 0,
+        yaw: -0.001, 
+        pitch: -0.011,
       },
 
       {
@@ -66,8 +66,8 @@ export const scenes = {
         type: "scene",
         label: "Surveillance Room",
         target: "surveillance",
-        yaw: -1.2,
-        pitch: 0,
+        yaw: 0.501, 
+        pitch: -0.011,
       },
 
       {
@@ -75,8 +75,7 @@ export const scenes = {
         type: "scene",
         label: "🚁 Drone View",
         target: "skyview",
-        yaw: 2.5,
-        pitch: 0.2,
+        yaw: -1.741, pitch: -0.638
       },
     ],
   },
@@ -98,8 +97,8 @@ export const scenes = {
         type: "scene",
         label: "Unloading Area",
         target: "unloading",
-        yaw: 0.4,
-        pitch: 0,
+        yaw: -1.711, 
+        pitch: 0.126,
       },
 
       {
@@ -107,8 +106,8 @@ export const scenes = {
         type: "scene",
         label: "Documentation Room",
         target: "documentation",
-        yaw: 1.1,
-        pitch: 0,
+        yaw: -2.00, 
+        pitch: -0.044,
       },
 
       {
@@ -116,8 +115,8 @@ export const scenes = {
         type: "scene",
         label: "Surveillance Room",
         target: "surveillance",
-        yaw: -1.1,
-        pitch: 0,
+        yaw: -2.172, 
+        pitch: 0.014,
       },
 
       {
@@ -134,8 +133,8 @@ export const scenes = {
         type: "scene",
         label: "Loading Area",
         target: "loadingarea",
-        yaw: -2.0,
-        pitch: 0,
+        yaw: 1.0,
+        pitch: 0.1,
       },
 
       {
@@ -143,8 +142,7 @@ export const scenes = {
         type: "scene",
         label: "← KN CFS Polaris",
         target: "cfs",
-        yaw: 0,
-        pitch: 0,
+        yaw: -1.609, pitch: -0.67
       },
     ],
   },
