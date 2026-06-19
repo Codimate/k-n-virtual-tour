@@ -23,9 +23,7 @@ export default function Tour() {
         onSceneChange={setCurrentScene}
       />
 
-      <ContentDrawer
-        scene={scenes[currentScene]}
-      />
+    
 
       <SceneSelector
         scenes={scenes}

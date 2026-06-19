@@ -1,3 +1,5 @@
+import "../styles/scene-selector.css";
+
 export default function SceneSelector({
   scenes,
   currentScene,
