@@ -10,6 +10,7 @@ import "../styles/hotspot.css";
 export default function MarzipanoViewer({
   scene,
   onSceneChange,
+  onInfoOpen,
 }) {
   const viewerRef = useRef(null);
 
@@ -91,15 +92,23 @@ export default function MarzipanoViewer({
             "div"
           );
 
+        // Use different CSS class for info-type hotspots
+        const hotspotClass =
+          hotspot.type === "info"
+            ? "kn-hotspot kn-hotspot-info"
+            : "kn-hotspot";
+
         hotspotElement.innerHTML = `
-          <div class="kn-hotspot">
+          <div class="kn-hotspot-anchor">
+            <div class="${hotspotClass}">
 
-            <div class="kn-hotspot-label">
-              ${hotspot.label}
+              <div class="kn-hotspot-label">
+                ${hotspot.label}
+              </div>
+
+              <div class="kn-hotspot-pointer"></div>
+
             </div>
-
-            <div class="kn-hotspot-pointer"></div>
-
           </div>
         `;
 
@@ -119,9 +128,11 @@ export default function MarzipanoViewer({
                 break;
 
               case "info":
-                console.log(
-                  "Info hotspot clicked"
-                );
+                if (onInfoOpen) {
+                  onInfoOpen(
+                    hotspot.target
+                  );
+                }
                 break;
 
               case "video":
@@ -159,7 +170,7 @@ export default function MarzipanoViewer({
     return () => {
       viewer.destroy?.();
     };
-  }, [scene, onSceneChange]);
+  }, [scene, onSceneChange, onInfoOpen]);
 
   return (
     <>

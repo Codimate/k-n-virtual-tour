@@ -1,0 +1,794 @@
+/* ============================================================
+   INFORMATION MODAL — Apple-Style Bento Grid
+   ============================================================ */
+
+/* ── CSS Custom Properties ─────────────────────────────────── */
+:root {
+  --modal-font: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --modal-bg-overlay: rgba(0, 0, 0, 0.4);
+  --modal-blur: 8px;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-bg-hover: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-hover: rgba(255, 255, 255, 0.16);
+  --card-radius: 24px;
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --card-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.35);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-tertiary: rgba(255, 255, 255, 0.45);
+  --transition-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Overlay ───────────────────────────────────────────────── */
+.info-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--modal-bg-overlay);
+  backdrop-filter: blur(var(--modal-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--modal-blur)) saturate(140%);
+
+  display: flex;
+  align-items: center; /* Centered in viewport */
+  justify-content: center;
+  padding: 24px;
+
+  /* Animation */
+  opacity: 0;
+  animation: overlayFadeIn 0.4s var(--transition-ease) forwards;
+}
+
+.info-modal-overlay.closing {
+  animation: overlayFadeOut 0.3s var(--transition-ease) forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes overlayFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── Modal Container (Immersive Popup) ─────────────────────── */
+.info-modal-container {
+  width: 100%;
+  max-width: 1100px;
+  max-height: 85vh; /* Pinned height popup */
+  position: relative;
+  
+  display: flex;
+  flex-direction: column;
+  background: var(--modal-bg, rgba(18, 18, 22, 0.85));
+  border: 1px solid var(--modal-border, rgba(255, 255, 255, 0.08));
+  border-radius: 32px;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+
+  /* SCROLLING LAG OPTIMIZATION: 
+     Removed redundant container backdrop-filter. Since the parent overlay 
+     already blurs the background panorama, a second blur filter on the container 
+     triggers double blur recalculations on every scroll event, resulting in heavy lag. 
+     Removing this makes scrolling butter-smooth (60fps) on all devices. */
+
+  /* Animation */
+  opacity: 0;
+  transform: scale(0.95) translateY(30px);
+  animation: containerSlideIn 0.5s var(--transition-spring) 0.1s forwards;
+}
+
+.info-modal-overlay.closing .info-modal-container {
+  animation: containerSlideOut 0.3s var(--transition-ease) forwards;
+}
+
+@keyframes containerSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes containerSlideOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+}
+
+/* ── Scrollable Area ───────────────────────────────────────── */
+.info-modal-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 50px 40px 60px;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position; /* Enable compositor scroll optimizations */
+}
+
+/* Scrollbar styling for inner scrollable area */
+.info-modal-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+.info-modal-scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+.info-modal-scrollable::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+.info-modal-scrollable::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ── Close Button ──────────────────────────────────────────── */
+.info-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10001;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--modal-border, rgba(255, 255, 255, 0.1));
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 300;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s var(--transition-spring);
+}
+
+.info-modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.info-modal-close:active {
+  transform: scale(0.95);
+}
+
+/* ── Theme Toggle Button ─────────────────────────────────────── */
+.info-modal-theme-toggle {
+  position: absolute;
+  top: 24px;
+  right: 76px; /* Positioned left of Close button */
+  z-index: 10001;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--modal-border, rgba(255, 255, 255, 0.1));
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  font-size: 16px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s var(--transition-spring);
+}
+
+.info-modal-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.info-modal-theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ── Light Mode Color Theme Overrides ───────────────────────── */
+.info-modal-container.theme-light {
+  /* Apple Light Mode values */
+  --modal-bg: rgba(245, 245, 247, 0.94); /* Apple off-white */
+  --modal-border: rgba(0, 0, 0, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.78); /* High contrast white cards */
+  --card-bg-hover: rgba(255, 255, 255, 0.98);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-border-hover: rgba(0, 0, 0, 0.12);
+  --text-primary: #1d1d1f; /* Apple charcoal */
+  --text-secondary: #515154;
+  --text-tertiary: #86868b;
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.08);
+
+  --feature-bg: rgba(0, 0, 0, 0.015);
+  --feature-bg-hover: rgba(0, 0, 0, 0.035);
+  --feature-border: rgba(0, 0, 0, 0.04);
+  --feature-border-hover: rgba(0, 0, 0, 0.08);
+
+  --process-line: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.03)
+  );
+
+  background: var(--modal-bg);
+  border-color: var(--modal-border);
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.info-modal-header {
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: var(--modal-font);
+}
+
+.info-modal-header-icon {
+  font-size: 44px;
+  margin-bottom: 12px;
+  display: block;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.info-modal-title {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+  margin: 0 0 6px;
+  line-height: 1.15;
+}
+
+.info-modal-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.info-modal-accent-line {
+  width: 50px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 16px auto 0;
+  opacity: 0.9;
+}
+
+/* ── Bento Grid (4-Column Layout) ────────────────────────── */
+.info-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* ── Card Base ─────────────────────────────────────────────── */
+.info-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: 24px;
+  font-family: var(--modal-font);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow: var(--card-shadow);
+  transition:
+    background 0.4s var(--transition-spring),
+    border-color 0.4s var(--transition-spring),
+    box-shadow 0.4s var(--transition-spring),
+    transform 0.4s var(--transition-spring);
+
+  /* Staggered entrance */
+  opacity: 0;
+  transform: translateY(16px);
+  animation: cardFadeIn 0.5s var(--transition-spring) forwards;
+}
+
+.info-card:hover {
+  background: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 4-Column Card Span Variants */
+.info-card--col1 {
+  grid-column: span 1;
+}
+
+.info-card--col2 {
+  grid-column: span 2;
+}
+
+.info-card--col3 {
+  grid-column: span 3;
+}
+
+.info-card--col4 {
+  grid-column: span 4;
+}
+
+/* ── Stat Card (Apple Bento Cell) ────────────────────────── */
+.info-stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 150px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.info-stat-card:hover {
+  border-color: var(--accent-color, #0a84ff);
+}
+
+.info-stat-card-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.info-stat-card-icon {
+  font-size: 22px;
+  opacity: 0.8;
+}
+
+.info-stat-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-stat-card-value {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.info-stat-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+/* ── Card Header ───────────────────────────────────────────── */
+.info-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.info-card-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.info-card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.1px;
+  margin: 0;
+}
+
+.info-card-text {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── Features Grid (inside a wide card) ────────────────────── */
+.info-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.info-feature-item {
+  background: var(--feature-bg, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--feature-border, rgba(255, 255, 255, 0.06));
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.3s var(--transition-spring);
+}
+
+.info-feature-item:hover {
+  background: var(--feature-bg-hover, rgba(255, 255, 255, 0.08));
+  border-color: var(--feature-border-hover, rgba(255, 255, 255, 0.12));
+  transform: translateY(-2px);
+}
+
+.info-feature-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.info-feature-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+}
+
+.info-feature-description {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── Statistics ────────────────────────────────────────────── */
+.info-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.info-stat-item {
+  text-align: center;
+  padding: 16px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  transition: all 0.3s var(--transition-spring);
+}
+
+.info-stat-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.info-stat-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.info-stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+  margin: 0 0 4px;
+}
+
+.info-stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* ── Process Flow ──────────────────────────────────────────── */
+.info-process-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+}
+
+.info-process-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 0 10px;
+
+  /* Stagger */
+  opacity: 0;
+  transform: translateY(12px);
+  animation: cardFadeIn 0.5s var(--transition-spring) forwards;
+}
+
+/* Connector line between steps */
+.info-process-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: calc(50% + 22px);
+  width: calc(100% - 44px);
+  height: 2px;
+  background: var(--process-line, linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.08)
+  ));
+  border-radius: 1px;
+}
+
+.info-process-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.info-process-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.info-process-description {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── Gallery Grid ──────────────────────────────────────────── */
+.info-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.info-gallery-item {
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s var(--transition-spring);
+}
+
+.info-gallery-item:hover {
+  transform: scale(1.03);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.info-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+}
+
+.info-gallery-item:hover img {
+  filter: brightness(1.05);
+}
+
+/* ── Lightbox ──────────────────────────────────────────────── */
+.info-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10010;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  cursor: pointer;
+  animation: overlayFadeIn 0.3s var(--transition-ease) forwards;
+}
+
+.info-lightbox img {
+  max-width: 90%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: containerSlideIn 0.4s var(--transition-spring) forwards;
+}
+
+/* ── Video Player ──────────────────────────────────────────── */
+.info-video-wrapper {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.info-video-wrapper video {
+  width: 100%;
+  display: block;
+  background: #000;
+}
+
+.info-video-placeholder {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-tertiary);
+  font-family: var(--modal-font);
+}
+
+.info-video-placeholder-icon {
+  font-size: 40px;
+  opacity: 0.5;
+}
+
+.info-video-placeholder-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ── Empty State ───────────────────────────────────────────── */
+.info-empty-state {
+  text-align: center;
+  padding: 32px;
+  color: var(--text-tertiary);
+  font-family: var(--modal-font);
+}
+
+.info-empty-state-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  opacity: 0.4;
+  display: block;
+}
+
+.info-empty-state-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .info-modal-container {
+    max-height: 90vh;
+  }
+
+  .info-modal-scrollable {
+    padding: 40px 24px 50px;
+  }
+
+  .info-modal-title {
+    font-size: 30px;
+  }
+
+  .info-modal-subtitle {
+    font-size: 15px;
+  }
+
+  .info-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .info-card--col1 {
+    grid-column: span 1;
+  }
+
+  .info-card--col2,
+  .info-card--col3,
+  .info-card--col4 {
+    grid-column: span 2;
+  }
+
+  .info-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-process-flow {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-process-step:not(:last-child)::after {
+    display: none;
+  }
+
+  .info-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .info-modal-container {
+    max-height: 95vh;
+  }
+
+  .info-modal-scrollable {
+    padding: 30px 16px 40px;
+  }
+
+  .info-modal-title {
+    font-size: 24px;
+  }
+
+  .info-modal-close {
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .info-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .info-bento-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .info-card--col1,
+  .info-card--col2,
+  .info-card--col3,
+  .info-card--col4 {
+    grid-column: span 1;
+  }
+
+  .info-stat-card {
+    min-height: 120px;
+    padding: 16px;
+  }
+
+  .info-stat-card-value {
+    font-size: 24px;
+  }
+
+  .info-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}

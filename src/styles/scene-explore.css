@@ -1,0 +1,54 @@
+.scene-explore-btn {
+  position: fixed;
+
+  right: 30px;
+  bottom: 24px;
+
+  z-index: 9998;
+
+  background: #0054a6;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 999px;
+
+  padding: 14px 24px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 30px rgba(0, 84, 166, 0.35);
+
+  transition: all 0.25s ease;
+
+  backdrop-filter: blur(12px);
+}
+
+.scene-explore-btn:hover {
+  background: #0067cc;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 40px rgba(0, 84, 166, 0.45);
+}
+
+.scene-explore-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .scene-explore-btn {
+    right: 20px;
+    bottom: 105px;
+
+    padding: 12px 20px;
+
+    font-size: 13px;
+  }
+}

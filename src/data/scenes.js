@@ -1,3 +1,13 @@
+/**
+ * scenes.js
+ * ─────────
+ * Scene definitions for the 360° virtual tour.
+ *
+ * Only scenes with REAL panorama images are kept as navigable scenes.
+ * Locations without dedicated panoramas use type: "info" hotspots,
+ * which open the InformationModal overlay instead of navigating.
+ */
+
 export const scenes = {
   skyview: {
     id: "skyview",
@@ -45,7 +55,7 @@ export const scenes = {
 
       {
         id: "unloading",
-        type: "scene",
+        type: "info",
         label: "Unloading Area",
         target: "unloading",
         yaw: -1.114,
@@ -54,7 +64,7 @@ export const scenes = {
 
       {
         id: "documentation",
-        type: "scene",
+        type: "info",
         label: "Documentation Room",
         target: "documentation",
         yaw: -0.001, 
@@ -63,7 +73,7 @@ export const scenes = {
 
       {
         id: "surveillance",
-        type: "scene",
+        type: "info",
         label: "Surveillance Room",
         target: "surveillance",
         yaw: 0.501, 
@@ -94,7 +104,7 @@ export const scenes = {
     hotspots: [
       {
         id: "unloading",
-        type: "scene",
+        type: "info",
         label: "Unloading Area",
         target: "unloading",
         yaw: -1.711, 
@@ -103,7 +113,7 @@ export const scenes = {
 
       {
         id: "documentation",
-        type: "scene",
+        type: "info",
         label: "Documentation Room",
         target: "documentation",
         yaw: -2.00, 
@@ -112,7 +122,7 @@ export const scenes = {
 
       {
         id: "surveillance",
-        type: "scene",
+        type: "info",
         label: "Surveillance Room",
         target: "surveillance",
         yaw: -2.172, 
@@ -121,7 +131,7 @@ export const scenes = {
 
       {
         id: "hvc",
-        type: "scene",
+        type: "info",
         label: "High Value Cargo",
         target: "highvaluecargo",
         yaw: 2.0,
@@ -147,117 +157,36 @@ export const scenes = {
     ],
   },
 
-  unloading: {
-    id: "unloading",
-
-    title: "Unloading Area",
-
-    description: "Unloading Operations",
-
-    image: "/panoramas/main3.JPG",
-
-    thumbnail: "/panoramas/main3.JPG",
-
-    hotspots: [
-      {
-        id: "back-warehouse",
-        type: "scene",
-        label: "← Warehouse",
-        target: "warehouse",
-        yaw: 0,
-        pitch: 0,
-      },
-    ],
-  },
-
-  documentation: {
-    id: "documentation",
-
-    title: "Documentation Room",
-
-    description: "Documentation Operations",
-
-    image: "/panoramas/main3.JPG",
-
-    thumbnail: "/panoramas/main3.JPG",
-
-    hotspots: [
-      {
-        id: "back-warehouse",
-        type: "scene",
-        label: "← Warehouse",
-        target: "warehouse",
-        yaw: 0,
-        pitch: 0,
-      },
-    ],
-  },
-
-  surveillance: {
-    id: "surveillance",
-
-    title: "Surveillance Room",
-
-    description: "Surveillance Operations",
-
-    image: "/panoramas/main3.JPG",
-
-    thumbnail: "/panoramas/main3.JPG",
-
-    hotspots: [
-      {
-        id: "back-warehouse",
-        type: "scene",
-        label: "← Warehouse",
-        target: "warehouse",
-        yaw: 0,
-        pitch: 0,
-      },
-    ],
-  },
-
-  highvaluecargo: {
-    id: "highvaluecargo",
-
-    title: "High Value Cargo",
-
-    description: "High Value Cargo Storage",
-
-    image: "/panoramas/main3.JPG",
-
-    thumbnail: "/panoramas/main3.JPG",
-
-    hotspots: [
-      {
-        id: "back-warehouse",
-        type: "scene",
-        label: "← Warehouse",
-        target: "warehouse",
-        yaw: 0,
-        pitch: 0,
-      },
-    ],
-  },
-
   loadingarea: {
     id: "loadingarea",
-
     title: "Loading Area",
-
-    description: "Loading Operations",
-
-    image: "/panoramas/main3.JPG",
-
-    thumbnail: "/panoramas/main3.JPG",
-
+    description: "Loading and Dispatch Area",
+    image: "/panoramas/main2.JPG",
+    thumbnail: "/panoramas/main2.JPG",
     hotspots: [
       {
-        id: "back-warehouse",
+        id: "warehouse",
         type: "scene",
-        label: "← Warehouse",
+        label: "Warehouse",
         target: "warehouse",
-        yaw: 0,
-        pitch: 0,
+        yaw: -0.8,
+        pitch: 0.0,
+      },
+      {
+        id: "cfs",
+        type: "scene",
+        label: "KN CFS Polaris",
+        target: "cfs",
+        yaw: 0.0,
+        pitch: 0.0,
+      },
+      {
+        id: "drone",
+        type: "scene",
+        label: "🚁 Drone View",
+        target: "skyview",
+        yaw: 0.8,
+        pitch: -0.3,
       },
     ],
   },
