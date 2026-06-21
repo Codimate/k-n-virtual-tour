@@ -84,6 +84,15 @@ export default function MarzipanoViewer({
 
     marzipanoScene.switchTo();
 
+    if (scene.id === "skyview") {
+      setTimeout(() => {
+        marzipanoScene.lookTo(
+          { yaw: 1.474, pitch: 1.552 },
+          { transitionDuration: 6000 } // Slowly move over 6 seconds
+        );
+      }, 500);
+    }
+
     // Hotspots
     scene.hotspots.forEach(
       (hotspot) => {

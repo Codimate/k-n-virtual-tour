@@ -16,9 +16,9 @@ export const scenes = {
 
     description: "K+N Facility Overview",
 
-    image: "/panoramas/main1.JPG",
+    image: "/panoramas/main1.webp",
 
-    thumbnail: "/panoramas/main1.JPG",
+    thumbnail: "/panoramas/main1.webp",
 
     hotspots: [
       {
@@ -39,9 +39,9 @@ export const scenes = {
 
     description: "Container Freight Station",
 
-    image: "/panoramas/main2.JPG",
+    image: "/panoramas/main2.webp",
 
-    thumbnail: "/panoramas/main2.JPG",
+    thumbnail: "/panoramas/main2.webp",
 
     hotspots: [
       {
@@ -49,8 +49,8 @@ export const scenes = {
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: -0.256,
-        pitch: -0.016,
+        yaw: -0.200,
+        pitch: 0.056,
       },
 
       {
@@ -67,7 +67,7 @@ export const scenes = {
         type: "info",
         label: "Documentation Room",
         target: "documentation",
-        yaw: -0.001, 
+        yaw: 0.111, 
         pitch: -0.011,
       },
 
@@ -76,7 +76,7 @@ export const scenes = {
         type: "info",
         label: "Surveillance Room",
         target: "surveillance",
-        yaw: 0.501, 
+        yaw: 0.611, 
         pitch: -0.011,
       },
 
@@ -97,9 +97,9 @@ export const scenes = {
 
     description: "Warehouse Operations",
 
-    image: "/panoramas/main3.JPG",
+    image: "/panoramas/main3.webp",
 
-    thumbnail: "/panoramas/main3.JPG",
+    thumbnail: "/panoramas/main3.webp",
 
     hotspots: [
       {
@@ -107,7 +107,7 @@ export const scenes = {
         type: "info",
         label: "Unloading Area",
         target: "unloading",
-        yaw: -1.711, 
+        yaw: -1.060, 
         pitch: 0.126,
       },
 
@@ -116,8 +116,8 @@ export const scenes = {
         type: "info",
         label: "Documentation Room",
         target: "documentation",
-        yaw: -2.00, 
-        pitch: -0.044,
+        yaw: -2.121, 
+        pitch: 0.190,
       },
 
       {
@@ -125,8 +125,8 @@ export const scenes = {
         type: "info",
         label: "Surveillance Room",
         target: "surveillance",
-        yaw: -2.172, 
-        pitch: 0.014,
+        yaw: -1.952, 
+        pitch: 0.110,
       },
 
       {
@@ -134,8 +134,8 @@ export const scenes = {
         type: "info",
         label: "High Value Cargo",
         target: "highvaluecargo",
-        yaw: 2.0,
-        pitch: 0,
+        yaw: 2.3,
+        pitch: 0.120,
       },
 
       {
@@ -152,7 +152,8 @@ export const scenes = {
         type: "scene",
         label: "← KN CFS Polaris",
         target: "cfs",
-        yaw: -1.609, pitch: -0.67
+        yaw: -1.630, 
+        pitch: 0.126,
       },
     ],
   },
@@ -161,8 +162,8 @@ export const scenes = {
     id: "loadingarea",
     title: "Loading Area",
     description: "Loading and Dispatch Area",
-    image: "/panoramas/main2.JPG",
-    thumbnail: "/panoramas/main2.JPG",
+    image: "/panoramas/main2.webp",
+    thumbnail: "/panoramas/main2.webp",
     hotspots: [
       {
         id: "warehouse",
