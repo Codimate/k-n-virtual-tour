@@ -162,31 +162,29 @@ export const scenes = {
     id: "loadingarea",
     title: "Loading Area",
     description: "Loading and Dispatch Area",
-    image: "/panoramas/main2.webp",
-    thumbnail: "/panoramas/main2.webp",
+    image: "public/panoramas/loadingarea.JPG",
+    thumbnail: "public/panoramas/loadingarea.JPG",
     hotspots: [
       {
         id: "warehouse",
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: -0.8,
-        pitch: 0.0,
+        yaw: 1.317, pitch: 0.865
       },
       {
         id: "cfs",
         type: "scene",
         label: "KN CFS Polaris",
         target: "cfs",
-        yaw: 0.0,
-        pitch: 0.0,
+        yaw: 1.317, pitch: 0.265
       },
       {
         id: "drone",
         type: "scene",
         label: "🚁 Drone View",
         target: "skyview",
-        yaw: 0.8,
+        yaw: 1.4,
         pitch: -0.3,
       },
     ],

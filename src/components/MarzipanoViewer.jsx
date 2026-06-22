@@ -93,6 +93,15 @@ export default function MarzipanoViewer({
       }, 500);
     }
 
+    if (scene.id === "loadingarea") {
+      setTimeout(() => {
+        marzipanoScene.lookTo(
+          { yaw: 1.853, pitch: 0.326 },
+          { transitionDuration: 6000 } // Slowly move over 6 seconds
+        );
+      }, 500);
+    }
+
     // Hotspots
     scene.hotspots.forEach(
       (hotspot) => {
