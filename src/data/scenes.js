@@ -162,7 +162,7 @@ export const scenes = {
     id: "loadingarea",
     title: "Loading Area",
     description: "Loading and Dispatch Area",
-    image: "/panoramas/loadingarea.JPG.",
+    image: "/panoramas/loadingarea.WEBP.",
     thumbnail: "/panoramas/loadingarea.WEBP.",
     hotspots: [
       {
