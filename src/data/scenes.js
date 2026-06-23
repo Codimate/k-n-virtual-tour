@@ -162,8 +162,8 @@ export const scenes = {
     id: "loadingarea",
     title: "Loading Area",
     description: "Loading and Dispatch Area",
-    image: "/panoramas/loadingarea.WEBP.",
-    thumbnail: "/panoramas/loadingarea.WEBP.",
+    image: "/panoramas/loadingarea.webp",
+    thumbnail: "/panoramas/loadingarea.webp",
     hotspots: [
       {
         id: "warehouse",
