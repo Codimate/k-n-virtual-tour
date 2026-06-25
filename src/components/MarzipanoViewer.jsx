@@ -1,3 +1,4 @@
+
 import {
   useEffect,
   useRef,
@@ -13,6 +14,14 @@ export default function MarzipanoViewer({
   onInfoOpen,
 }) {
   const viewerRef = useRef(null);
+  const viewerInstanceRef = useRef(null);
+  const scenesRef = useRef({});
+
+  const onSceneChangeRef =
+    useRef(onSceneChange);
+
+  const onInfoOpenRef =
+    useRef(onInfoOpen);
 
   const [position, setPosition] =
     useState({
@@ -21,174 +30,246 @@ export default function MarzipanoViewer({
     });
 
   useEffect(() => {
+    onSceneChangeRef.current =
+      onSceneChange;
+
+    onInfoOpenRef.current =
+      onInfoOpen;
+  }, [onSceneChange, onInfoOpen]);
+
+  // Create Viewer Once
+  useEffect(() => {
     if (!viewerRef.current) return;
 
-    viewerRef.current.innerHTML = "";
-
-    const viewer = new Marzipano.Viewer(
-      viewerRef.current
-    );
-
-    const source =
-      Marzipano.ImageUrlSource.fromString(
-        scene.image
-      );
-
-    const geometry =
-      new Marzipano.EquirectGeometry([
+    const viewer =
+      new Marzipano.Viewer(
+        viewerRef.current,
         {
-          width: 8000,
-        },
-      ]);
-
-    const limiter =
-      Marzipano.RectilinearView.limit.traditional(
-        4096,
-        (120 * Math.PI) / 180
+          controls: {
+            mouseViewMode: "drag",
+          },
+        }
       );
 
-    const view =
-      new Marzipano.RectilinearView(
-        {
-          yaw: 0,
-          pitch: 0,
-          fov: Math.PI / 2,
-        },
-        limiter
-      );
-
-    const updatePosition = () => {
-      setPosition({
-        yaw: Number(
-          view.yaw().toFixed(3)
-        ),
-        pitch: Number(
-          view.pitch().toFixed(3)
-        ),
-      });
-    };
-
-    view.addEventListener(
-      "change",
-      updatePosition
-    );
-
-    updatePosition();
-
-    const marzipanoScene =
-      viewer.createScene({
-        source,
-        geometry,
-        view,
-      });
-
-    marzipanoScene.switchTo();
-
-    if (scene.id === "skyview") {
-      setTimeout(() => {
-        marzipanoScene.lookTo(
-          { yaw: 1.474, pitch: 1.552 },
-          { transitionDuration: 6000 } // Slowly move over 6 seconds
-        );
-      }, 500);
-    }
-
-    if (scene.id === "loadingarea") {
-      setTimeout(() => {
-        marzipanoScene.lookTo(
-          { yaw: 1.853, pitch: 0.326 },
-          { transitionDuration: 6000 } // Slowly move over 6 seconds
-        );
-      }, 500);
-    }
-
-    // Hotspots
-    scene.hotspots.forEach(
-      (hotspot) => {
-        const hotspotElement =
-          document.createElement(
-            "div"
-          );
-
-        // Use different CSS class for info-type hotspots
-        const hotspotClass =
-          hotspot.type === "info"
-            ? "kn-hotspot kn-hotspot-info"
-            : "kn-hotspot";
-
-        hotspotElement.innerHTML = `
-          <div class="kn-hotspot-anchor">
-            <div class="${hotspotClass}">
-
-              <div class="kn-hotspot-label">
-                ${hotspot.label}
-              </div>
-
-              <div class="kn-hotspot-pointer"></div>
-
-            </div>
-          </div>
-        `;
-
-        hotspotElement.style.cursor =
-          "pointer";
-
-        hotspotElement.addEventListener(
-          "click",
-          () => {
-            switch (
-              hotspot.type
-            ) {
-              case "scene":
-                onSceneChange(
-                  hotspot.target
-                );
-                break;
-
-              case "info":
-                if (onInfoOpen) {
-                  onInfoOpen(
-                    hotspot.target
-                  );
-                }
-                break;
-
-              case "video":
-                console.log(
-                  "Video hotspot clicked"
-                );
-                break;
-
-              case "gallery":
-                console.log(
-                  "Gallery hotspot clicked"
-                );
-                break;
-
-              default:
-                break;
-            }
-          }
-        );
-
-        marzipanoScene
-          .hotspotContainer()
-          .createHotspot(
-            hotspotElement,
-            {
-              yaw:
-                hotspot.yaw,
-              pitch:
-                hotspot.pitch,
-            }
-          );
-      }
-    );
+    viewerInstanceRef.current =
+      viewer;
 
     return () => {
       viewer.destroy?.();
+
+      viewerInstanceRef.current =
+        null;
+
+      scenesRef.current = {};
     };
-  }, [scene, onSceneChange, onInfoOpen]);
+  }, []);
+
+  // Scene Loader
+  useEffect(() => {
+    const viewer =
+      viewerInstanceRef.current;
+
+    if (!viewer) return;
+
+    let marzipanoScene =
+      scenesRef.current[scene.id];
+
+    if (!marzipanoScene) {
+      const source =
+        Marzipano.ImageUrlSource.fromString(
+          scene.image
+        );
+
+      const geometry =
+        new Marzipano.EquirectGeometry(
+          [
+            {
+              width: 8000,
+            },
+          ]
+        );
+
+      const limiter =
+        Marzipano.RectilinearView.limit.traditional(
+          4096,
+          (120 * Math.PI) / 180
+        );
+
+      const view =
+        new Marzipano.RectilinearView(
+          {
+            yaw: 0,
+            pitch: 0,
+            fov: Math.PI / 2,
+          },
+          limiter
+        );
+
+      // Developer Tool Updates
+      const updatePosition =
+        () => {
+          setPosition({
+            yaw: Number(
+              view
+                .yaw()
+                .toFixed(3)
+            ),
+
+            pitch: Number(
+              view
+                .pitch()
+                .toFixed(3)
+            ),
+          });
+        };
+
+      view.addEventListener(
+        "change",
+        updatePosition
+      );
+
+      updatePosition();
+
+      marzipanoScene =
+        viewer.createScene({
+          source,
+          geometry,
+          view,
+        });
+
+      // Create Hotspots
+      scene.hotspots.forEach(
+        (hotspot) => {
+          const hotspotElement =
+            document.createElement(
+              "div"
+            );
+
+          const hotspotClass =
+            hotspot.type ===
+            "info"
+              ? "kn-hotspot kn-hotspot-info"
+              : "kn-hotspot";
+
+          hotspotElement.innerHTML = `
+            <div class="kn-hotspot-anchor">
+
+              <div class="${hotspotClass}">
+
+                <div class="kn-hotspot-label">
+                  ${hotspot.label}
+                </div>
+
+                <div class="kn-hotspot-pointer"></div>
+
+              </div>
+
+            </div>
+          `;
+
+          hotspotElement.style.cursor =
+            "pointer";
+
+          hotspotElement.addEventListener(
+            "click",
+            () => {
+              switch (
+                hotspot.type
+              ) {
+                case "scene":
+                  onSceneChangeRef.current?.(
+                    hotspot.target
+                  );
+                  break;
+
+                case "info":
+                  onInfoOpenRef.current?.(
+                    hotspot.target
+                  );
+                  break;
+
+                default:
+                  break;
+              }
+            }
+          );
+
+          marzipanoScene
+            .hotspotContainer()
+            .createHotspot(
+              hotspotElement,
+              {
+                yaw:
+                  hotspot.yaw,
+                pitch:
+                  hotspot.pitch,
+              }
+            );
+        }
+      );
+
+      scenesRef.current[
+        scene.id
+      ] = marzipanoScene;
+    }
+
+    marzipanoScene.switchTo({
+      transitionDuration: 600,
+    });
+
+    // Skyview Animation
+    if (
+      scene.id === "skyview"
+    ) {
+      const timer =
+        setTimeout(() => {
+          if (
+            viewer.scene() ===
+            marzipanoScene
+          ) {
+            marzipanoScene.lookTo(
+              {
+                yaw: 1.474,
+                pitch: 1.552,
+              },
+              {
+                transitionDuration: 6000,
+              }
+            );
+          }
+        }, 500);
+
+      return () =>
+        clearTimeout(timer);
+    }
+
+    // Loading Area Animation
+    if (
+      scene.id ===
+      "loadingarea"
+    ) {
+      const timer =
+        setTimeout(() => {
+          if (
+            viewer.scene() ===
+            marzipanoScene
+          ) {
+            marzipanoScene.lookTo(
+              {
+                yaw: 1.853,
+                pitch: 0.326,
+              },
+              {
+                transitionDuration: 6000,
+              }
+            );
+          }
+        }, 500);
+
+      return () =>
+        clearTimeout(timer);
+    }
+  }, [scene]);
 
   return (
     <>
@@ -208,22 +289,14 @@ export default function MarzipanoViewer({
           position: "fixed",
           top: "90px",
           right: "20px",
-
           zIndex: 9999,
-
           background:
             "rgba(0,0,0,.85)",
-
           color: "white",
-
           padding: "14px",
-
           borderRadius: "12px",
-
           minWidth: "190px",
-
           fontSize: "14px",
-
           backdropFilter:
             "blur(10px)",
         }}
@@ -249,18 +322,12 @@ export default function MarzipanoViewer({
         <button
           style={{
             marginTop: "12px",
-
             width: "100%",
-
             padding: "10px",
-
             border: "none",
-
             borderRadius:
               "8px",
-
             cursor: "pointer",
-
             fontWeight: 600,
           }}
           onClick={() => {

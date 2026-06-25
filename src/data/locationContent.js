@@ -83,7 +83,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/doc_room_gallery.png"],
-    video: "https://assets.mixkit.co/videos/preview/mixkit-office-documents-and-folders-on-shelves-41616-large.mp4",
+    video: "/videos/Unloading1.mp4",
 
     additionalInfo: {
       title: "Compliance & Certifications",
@@ -164,7 +164,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/surveillance_gallery.png"],
-    video: "https://assets.mixkit.co/videos/preview/mixkit-security-cameras-operating-in-a-building-41615-large.mp4",
+    video: "/videos/Unloading1.mp4",
 
     additionalInfo: {
       title: "Security Certifications",
@@ -245,7 +245,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/hvc_gallery.png"],
-    video: "https://assets.mixkit.co/videos/preview/mixkit-warehouse-worker-using-a-tablet-41620-large.mp4",
+    video: "/videos/Unloading1.mp4",
 
     additionalInfo: {
       title: "Insurance & Liability",
@@ -325,8 +325,8 @@ export const locationContent = {
       { value: "98.5%", label: "On-Time Unloads", icon: "📊" },
     ],
 
-    gallery: ["/images/unloading_gallery.png"],
-    video: "https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-in-the-port-41618-large.mp4",
+    gallery: ["/images/unloading_img1.JPG" ,"/images/unloading_img2.JPG"],
+    video: "/videos/Unloading1.mp4",
 
     additionalInfo: {
       title: "Safety Standards",
@@ -407,7 +407,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/unloading_gallery.png"],
-    video: "https://assets.mixkit.co/videos/preview/mixkit-cargo-ship-in-the-port-41618-large.mp4",
+    video: "/videos/Unloading1.mp4",
 
     additionalInfo: {
       title: "Sustainability Initiatives",
@@ -556,8 +556,10 @@ warehouse: {
   ],
 
   gallery: [
-    "/panoramas/main3.JPG"
+    "/images/warehouse_img1.JPG",
+    "/images/warehouse_img1.JPG"
   ],
+  video: "/videos/warehouse_vid1.mp4",
 
   additionalInfo: {
     title: "Warehouse Overview",

@@ -55,7 +55,7 @@ export const scenes = {
 
       {
         id: "unloading",
-        type: "info",
+        type: "scene",
         label: "Unloading Area",
         target: "unloading",
         yaw: -1.114,
@@ -64,7 +64,7 @@ export const scenes = {
 
       {
         id: "documentation",
-        type: "info",
+        type: "scene",
         label: "Documentation Room",
         target: "documentation",
         yaw: 0.111, 
@@ -73,7 +73,7 @@ export const scenes = {
 
       {
         id: "surveillance",
-        type: "info",
+        type: "scene",
         label: "Surveillance Room",
         target: "surveillance",
         yaw: 0.611, 
@@ -104,7 +104,7 @@ export const scenes = {
     hotspots: [
       {
         id: "unloading",
-        type: "info",
+        type: "scene",
         label: "Unloading Area",
         target: "unloading",
         yaw: -1.060, 
@@ -113,7 +113,7 @@ export const scenes = {
 
       {
         id: "documentation",
-        type: "info",
+        type: "scene",
         label: "Documentation Room",
         target: "documentation",
         yaw: -2.121, 
@@ -122,7 +122,7 @@ export const scenes = {
 
       {
         id: "surveillance",
-        type: "info",
+        type: "scene",
         label: "Surveillance Room",
         target: "surveillance",
         yaw: -1.952, 
@@ -131,7 +131,7 @@ export const scenes = {
 
       {
         id: "hvc",
-        type: "info",
+        type: "scene",
         label: "High Value Cargo",
         target: "highvaluecargo",
         yaw: 2.3,
@@ -186,6 +186,82 @@ export const scenes = {
         target: "skyview",
         yaw: 1.4,
         pitch: -0.3,
+      },
+    ],
+  },
+
+  unloading: {
+    id: "unloading",
+    title: "Unloading Area",
+    description: "Container & Cargo Receiving",
+    image: "/panoramas/unloadingarea.webp",
+    thumbnail: "/panoramas/unloadingarea.webp",
+    hotspots: [
+      {
+        id: "warehouse",
+        type: "scene",
+        label: "Warehouse",
+        target: "warehouse",
+        yaw: -2.807, pitch: 0.329
+      },
+      {
+        id: "cfs",
+        type: "scene",
+        label: "KN CFS Polaris",
+        target: "cfs",
+        yaw: -0.479, pitch: 0.202
+      },
+    ],
+  },
+
+  surveillance: {
+    id: "surveillance",
+    title: "Surveillance Room",
+    description: "24/7 Security Operations",
+    image: "/panoramas/Survroom.webp",
+    thumbnail: "/panoramas/Survroom.webp",
+    hotspots: [
+      {
+        id: "warehouse",
+        type: "scene",
+        label: "Warehouse",
+        target: "warehouse",
+        yaw: -1.850, pitch: 0.329
+      }, 
+    ],
+  },
+
+  documentation: {
+    id: "documentation",
+    title: "Documentation Room",
+    description: "Customs & Processing Center",
+    image: "/panoramas/Documentationroom.webp",
+    thumbnail: "/panoramas/Documentationroom.webp",
+    hotspots: [
+      {
+        id: "warehouse",
+        type: "scene",
+        label: "Warehouse",
+        target: "warehouse",
+        yaw: -2.661, pitch: 0.009
+      },
+    ],
+  },
+
+  highvaluecargo: {
+    id: "highvaluecargo",
+    title: "High Value Cargo",
+    description: "Secure Premium Cargo Vault",
+    image: "/panoramas/main1.webp",
+    thumbnail: "/panoramas/main1.webp",
+    hotspots: [
+      {
+        id: "warehouse",
+        type: "scene",
+        label: "Warehouse",
+        target: "warehouse",
+        yaw: 0.0,
+        pitch: 0.1,
       },
     ],
   },

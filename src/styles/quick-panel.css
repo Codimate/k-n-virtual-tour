@@ -1,0 +1,238 @@
+/* quick-panel.css */
+
+.scene-quick-panel {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 380px;
+  max-height: calc(100vh - 200px);
+  z-index: 999;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  
+  /* Force GPU rendering */
+  transform: translate3d(0, 0, 0);
+  will-change: transform, background, border-color, width, max-height;
+  transition: 
+    background 0.3s ease, 
+    border-color 0.3s ease, 
+    color 0.3s ease, 
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Expanded state dimensions */
+.scene-quick-panel.expanded {
+  width: 680px;
+  max-height: calc(100vh - 200px);
+}
+
+/* Glassmorphism Dark Theme */
+.scene-quick-panel.dark {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Glassmorphism Light Theme */
+.scene-quick-panel.light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #1c1c1e;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scene-quick-panel.light .panel-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.2px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.theme-toggle, .expand-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: background 0.2s, transform 0.2s;
+  color: inherit;
+}
+
+.scene-quick-panel.light .theme-toggle,
+.scene-quick-panel.light .expand-toggle {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.theme-toggle:hover, .expand-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.scene-quick-panel.light .theme-toggle:hover,
+.scene-quick-panel.light .expand-toggle:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Content Area styling */
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* Video Section */
+.panel-video-wrapper {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.panel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Body and Typography */
+.panel-body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.panel-subtitle {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  opacity: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.panel-description {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  opacity: 0.8;
+}
+
+.scene-quick-panel.light .panel-description {
+  opacity: 0.9;
+  color: #3a3a3c;
+}
+
+/* Gallery Section */
+.panel-gallery h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.gallery-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0.9);
+}
+
+.gallery-img:hover {
+  transform: scale(1.02);
+  filter: brightness(1.05);
+}
+
+/* Custom Scrollbar for premium feel */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+}
+
+.scene-quick-panel.light .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* Expanded state overrides */
+.scene-quick-panel.expanded .gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.scene-quick-panel.expanded .gallery-img {
+  height: 220px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scene-quick-panel {
+    top: auto;
+    bottom: 140px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-height: 280px;
+  }
+  
+  .gallery-grid {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+  
+  .gallery-img {
+    width: 180px;
+    flex-shrink: 0;
+  }
+}
