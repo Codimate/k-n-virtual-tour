@@ -39,9 +39,9 @@ export const scenes = {
 
     description: "Container Freight Station",
 
-    image: "/panoramas/main2.webp",
+    image: "/panoramas/newmain.jpg",
 
-    thumbnail: "/panoramas/main2.webp",
+    thumbnail: "/panoramas/newmain.jpg",
 
     hotspots: [
       {
@@ -252,8 +252,8 @@ export const scenes = {
     id: "highvaluecargo",
     title: "High Value Cargo",
     description: "Secure Premium Cargo Vault",
-    image: "/panoramas/main1.webp",
-    thumbnail: "/panoramas/main1.webp",
+    image: "/panoramas/main3.webp",
+    thumbnail: "/panoramas/main3.webp",
     hotspots: [
       {
         id: "warehouse",

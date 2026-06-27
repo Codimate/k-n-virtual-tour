@@ -326,7 +326,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/unloading_img1.JPG" ,"/images/unloading_img2.JPG"],
-    video: "/videos/Unloading1.mp4",
+    video: "/videos/unloading_1.mp4",
 
     additionalInfo: {
       title: "Safety Standards",
@@ -407,7 +407,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/unloading_gallery.png"],
-    video: "/videos/Unloading1.mp4",
+    video: "/videos/loading_1.mp4",
 
     additionalInfo: {
       title: "Sustainability Initiatives",
@@ -559,7 +559,7 @@ warehouse: {
     "/images/warehouse_img1.JPG",
     "/images/warehouse_img1.JPG"
   ],
-  video: "/videos/warehouse_vid1.mp4",
+  video: "/videos/warehouse_1.mp4",
 
   additionalInfo: {
     title: "Warehouse Overview",

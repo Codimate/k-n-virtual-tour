@@ -233,7 +233,7 @@ export default function MarzipanoViewer({
                 pitch: 1.552,
               },
               {
-                transitionDuration: 6000,
+                transitionDuration: 4000,
               }
             );
           }
@@ -260,7 +260,7 @@ export default function MarzipanoViewer({
                 pitch: 0.326,
               },
               {
-                transitionDuration: 6000,
+                transitionDuration: 4000,
               }
             );
           }
@@ -284,7 +284,7 @@ export default function MarzipanoViewer({
       />
 
       {/* Developer Tool */}
-      <div
+      {/* <div
         style={{
           position: "fixed",
           top: "90px",
@@ -342,7 +342,7 @@ export default function MarzipanoViewer({
         >
           Copy Position
         </button>
-      </div>
+      </div> */}
     </>
   );
 }
