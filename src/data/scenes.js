@@ -12,19 +12,19 @@ export const scenes = {
   skyview: {
     id: "skyview",
 
-    title: "Drone View",
+    title: "KN CFS – Polaris (Aerial view)",
 
     description: "K+N Facility Overview",
 
     image: "/panoramas/main1.webp",
 
-    thumbnail: "/panoramas/main1.webp",
+    thumbnail: "/panoramas/thumbnails/skyview.webp",
 
     hotspots: [
       {
         id: "cfs",
         type: "scene",
-        label: "KN CFS Polaris",
+        label: "Entrance Gate",
         target: "cfs",
         yaw: 3.049,
         pitch: 1.546,
@@ -35,21 +35,21 @@ export const scenes = {
   cfs: {
     id: "cfs",
 
-    title: "KN CFS Polaris",
+    title: "Entrance Gate",
 
     description: "Container Freight Station",
 
     image: "/panoramas/newmain.jpg",
 
-    thumbnail: "/panoramas/newmain.jpg",
+    thumbnail: "/panoramas/thumbnails/cfs.webp",
 
     hotspots: [
       {
-        id: "warehouse",
+        id: "Warehousing space",
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: -0.200,
+        yaw: -0.450,
         pitch: 0.056,
       },
 
@@ -62,24 +62,7 @@ export const scenes = {
         pitch: 0.007,
       },
 
-      {
-        id: "documentation",
-        type: "scene",
-        label: "Documentation Room",
-        target: "documentation",
-        yaw: 0.111, 
-        pitch: -0.011,
-      },
-
-      {
-        id: "surveillance",
-        type: "scene",
-        label: "Surveillance Room",
-        target: "surveillance",
-        yaw: 0.611, 
-        pitch: -0.011,
-      },
-
+    
       {
         id: "drone",
         type: "scene",
@@ -93,13 +76,13 @@ export const scenes = {
   warehouse: {
     id: "warehouse",
 
-    title: "Warehouse",
+    title: "Warehousing space",
 
     description: "Warehouse Operations",
 
     image: "/panoramas/main3.webp",
 
-    thumbnail: "/panoramas/main3.webp",
+    thumbnail: "/panoramas/thumbnails/warehouse.webp",
 
     hotspots: [
       {
@@ -114,25 +97,25 @@ export const scenes = {
       {
         id: "documentation",
         type: "scene",
-        label: "Documentation Room",
+        label: "KN office – Documentation Processing Centre",
         target: "documentation",
-        yaw: -2.121, 
+        yaw: -2.060, 
         pitch: 0.190,
       },
 
       {
         id: "surveillance",
         type: "scene",
-        label: "Surveillance Room",
+        label: "Quality Room",
         target: "surveillance",
-        yaw: -1.952, 
-        pitch: 0.110,
+         yaw: -1.820, 
+        pitch: 0.210,
       },
 
       {
         id: "hvc",
         type: "scene",
-        label: "High Value Cargo",
+        label: "High Value Cargo Space",
         target: "highvaluecargo",
         yaw: 2.3,
         pitch: 0.120,
@@ -150,7 +133,7 @@ export const scenes = {
       {
         id: "back-cfs",
         type: "scene",
-        label: "← KN CFS Polaris",
+        label: "← KN CFS Entrance",
         target: "cfs",
         yaw: -1.630, 
         pitch: 0.126,
@@ -163,7 +146,7 @@ export const scenes = {
     title: "Loading Area",
     description: "Loading and Dispatch Area",
     image: "/panoramas/loadingarea.webp",
-    thumbnail: "/panoramas/loadingarea.webp",
+    thumbnail: "/panoramas/thumbnails/loadingarea.webp",
     hotspots: [
       {
         id: "warehouse",
@@ -195,7 +178,7 @@ export const scenes = {
     title: "Unloading Area",
     description: "Container & Cargo Receiving",
     image: "/panoramas/unloadingarea.webp",
-    thumbnail: "/panoramas/unloadingarea.webp",
+    thumbnail: "/panoramas/thumbnails/unloadingarea.webp",
     hotspots: [
       {
         id: "warehouse",
@@ -219,7 +202,7 @@ export const scenes = {
     title: "Surveillance Room",
     description: "24/7 Security Operations",
     image: "/panoramas/Survroom.webp",
-    thumbnail: "/panoramas/Survroom.webp",
+    thumbnail: "/panoramas/thumbnails/surveillance.webp",
     hotspots: [
       {
         id: "warehouse",
@@ -236,7 +219,7 @@ export const scenes = {
     title: "Documentation Room",
     description: "Customs & Processing Center",
     image: "/panoramas/Documentationroom.webp",
-    thumbnail: "/panoramas/Documentationroom.webp",
+    thumbnail: "/panoramas/thumbnails/documentation.webp",
     hotspots: [
       {
         id: "warehouse",
@@ -253,7 +236,7 @@ export const scenes = {
     title: "High Value Cargo",
     description: "Secure Premium Cargo Vault",
     image: "/panoramas/main3.webp",
-    thumbnail: "/panoramas/main3.webp",
+    thumbnail: "/panoramas/thumbnails/highvaluecargo.webp",
     hotspots: [
       {
         id: "warehouse",

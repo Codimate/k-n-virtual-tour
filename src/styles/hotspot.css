@@ -13,273 +13,161 @@
   align-items: center;
   cursor: pointer;
   z-index: 100;
-
   transform: translateY(0) scale(1);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Pulsing beacon at the tip of the pointer */
+/* Pulsing beacon behind the hotspot icon */
 .kn-hotspot::after {
   content: "";
   position: absolute;
-  bottom: 0;
+  top: 50%;
   left: 50%;
-
-  width: 10px;
-  height: 10px;
-
-  background: rgba(0, 84, 166, 0.6);
-
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 84, 166, 0.3);
   border-radius: 50%;
-
   z-index: -1;
   pointer-events: none;
-
   animation: hotspot-pulse 2s infinite ease-out;
+}
+
+.kn-hotspot-info::after {
+  background: rgba(0, 137, 106, 0.3);
 }
 
 @keyframes hotspot-pulse {
   0% {
-    transform: translateX(-50%) scale(0.8);
+    transform: translate(-50%, -50%) scale(0.85);
     opacity: 0.8;
   }
-
   100% {
-    transform: translateX(-50%) scale(3.5);
+    transform: translate(-50%, -50%) scale(2.2);
     opacity: 0;
   }
 }
 
 /* Hover: float up smoothly */
 .kn-hotspot:hover {
-  transform:
-    translateY(-6px)
-    scale(1.03);
+  transform: translateY(-4px) scale(1.02);
 }
 
-/* Modern Gradient + Glassmorphic Label */
+/* Modern Gradient + Glassmorphic Label (Hidden by default) */
 .kn-hotspot-label {
+  position: absolute;
+  bottom: 44px; /* Sits above the 32px icon container */
+  left: 50%;
+  transform: translateX(-50%) translateY(8px) scale(0.92);
+  
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
   background: linear-gradient(
     135deg,
     #0054a6 0%,
     #002d72 100%
   );
-
   color: #fff;
-
   padding: 8px 18px;
-
   border-radius: 16px;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Text",
-    "SF Pro Display",
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
-
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
   font-size: 13.5px;
   font-weight: 600;
-
   letter-spacing: 0.2px;
-
   white-space: nowrap;
-
-  border: 1px solid rgba(
-    255,
-    255,
-    255,
-    0.12
-  );
-
-  box-shadow:
-    0 10px 25px rgba(
-      0,
-      45,
-      114,
-      0.35
-    ),
-    0 2px 6px rgba(
-      0,
-      0,
-      0,
-      0.15
-    ),
-    inset 0 1px 1px rgba(
-      255,
-      255,
-      255,
-      0.25
-    );
-
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 10px 25px rgba(0, 45, 114, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.15);
+  
   transition:
-    background 0.4s
-      cubic-bezier(
-        0.16,
-        1,
-        0.3,
-        1
-      ),
-    border-color 0.4s
-      cubic-bezier(
-        0.16,
-        1,
-        0.3,
-        1
-      ),
-    box-shadow 0.4s
-      cubic-bezier(
-        0.16,
-        1,
-        0.3,
-        1
-      );
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.35s;
 }
 
-.kn-hotspot:hover .kn-hotspot-label {
-  background: linear-gradient(
-    135deg,
-    #0562be 0%,
-    #003688 100%
-  );
-
-  border-color: rgba(
-    255,
-    255,
-    255,
-    0.25
-  );
-
-  box-shadow:
-    0 14px 30px rgba(
-      0,
-      84,
-      166,
-      0.45
-    ),
-    0 4px 10px rgba(
-      0,
-      0,
-      0,
-      0.15
-    ),
-    inset 0 1px 1px rgba(
-      255,
-      255,
-      255,
-      0.35
-    );
-}
-
-/* Pointer */
-.kn-hotspot-pointer {
+/* Label pointer arrow */
+.kn-hotspot-label::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 0;
-
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-
-  border-top: 10px solid #002d72;
-
-  margin-top: -1px;
-
-  z-index: 2;
-
-  filter: drop-shadow(
-    0 4px 6px rgba(
-      0,
-      0,
-      0,
-      0.25
-    )
-  );
-
-  transition: border-top-color
-    0.4s
-    cubic-bezier(
-      0.16,
-      1,
-      0.3,
-      1
-    );
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #002d72; /* matches base gradient end */
 }
 
-.kn-hotspot:hover .kn-hotspot-pointer {
-  border-top-color: #003688;
-}
-
-/* Info Hotspot Variant */
+/* Info Hotspot Variant Label styling */
 .kn-hotspot-info .kn-hotspot-label {
   background: linear-gradient(
     135deg,
     #00896a 0%,
     #005a45 100%
   );
-
-  box-shadow:
-    0 10px 25px rgba(
-      0,
-      90,
-      69,
-      0.35
-    ),
-    0 2px 6px rgba(
-      0,
-      0,
-      0,
-      0.15
-    ),
-    inset 0 1px 1px rgba(
-      255,
-      255,
-      255,
-      0.25
-    );
+  box-shadow: 
+    0 10px 25px rgba(0, 90, 69, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.kn-hotspot-info:hover .kn-hotspot-label {
+.kn-hotspot-info .kn-hotspot-label::after {
+  border-top-color: #005a45; /* matches info gradient end */
+}
+
+/* Hover: reveal the label */
+.kn-hotspot:hover .kn-hotspot-label {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* Hotspot Icon Badge */
+.kn-hotspot-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   background: linear-gradient(
     135deg,
-    #00a37e 0%,
-    #006e54 100%
+    #0054a6 0%,
+    #002d72 100%
   );
-
-  box-shadow:
-    0 14px 30px rgba(
-      0,
-      137,
-      106,
-      0.45
-    ),
-    0 4px 10px rgba(
-      0,
-      0,
-      0,
-      0.15
-    ),
-    inset 0 1px 1px rgba(
-      255,
-      255,
-      255,
-      0.35
-    );
+  border: 2px solid #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1);
 }
 
-.kn-hotspot-info .kn-hotspot-pointer {
-  border-top-color: #005a45;
+/* Icon SVG styling */
+.kn-hotspot-icon svg.hotspot-pin-svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  display: block;
 }
 
-.kn-hotspot-info:hover .kn-hotspot-pointer {
-  border-top-color: #006e54;
-}
-
-.kn-hotspot-info::after {
-  background: rgba(
-    0,
-    137,
-    106,
-    0.6
+/* Info Icon Badge Styling */
+.kn-hotspot-info .kn-hotspot-icon {
+  background: linear-gradient(
+    135deg,
+    #00896a 0%,
+    #005a45 100%
   );
+}
+
+/* Hover effects for Icon Badge */
+.kn-hotspot:hover .kn-hotspot-icon {
+  transform: scale(1.12);
+  box-shadow: 0 6px 16px rgba(0, 84, 166, 0.45);
+}
+
+.kn-hotspot-info:hover .kn-hotspot-icon {
+  box-shadow: 0 6px 16px rgba(0, 137, 106, 0.45);
 }

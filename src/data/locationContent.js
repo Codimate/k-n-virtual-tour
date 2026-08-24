@@ -326,7 +326,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/unloading_img1.JPG" ,"/images/unloading_img2.JPG"],
-    video: "/videos/unloading_1.mp4",
+    video: ["/videos/IMG_3078.MOV","/videos/IMG_3080.MOV"],
 
     additionalInfo: {
       title: "Safety Standards",

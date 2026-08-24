@@ -4,11 +4,9 @@ import { scenes } from "../data/scenes";
 
 import Logo from "../components/Logo";
 import MarzipanoViewer from "../components/MarzipanoViewer";
-import SceneSelector from "../components/SceneSelector";
+import SceneDrawer from "../components/SceneDrawer";
 import InformationModal from "../components/InformationModal";
 import SceneQuickPanel from "../components/SceneQuickPanel";
-
-import "../styles/scene-explore.css";
 
 export default function Tour() {
   const [currentScene, setCurrentScene] =
@@ -45,35 +43,7 @@ export default function Tour() {
         onInfoOpen={setActiveLocation}
       />
 
-      {/* Explore Button */}
-      {[
-        "cfs",
-        "warehouse",
-        "loadingarea",
-      ].includes(currentScene) && (
-        <button
-          className="scene-explore-btn"
-          onClick={() =>
-            setActiveLocation(
-              currentScene
-            )
-          }
-        >
-          {currentScene ===
-            "cfs" &&
-            "Explore KN CFS Polaris"}
-
-          {currentScene ===
-            "warehouse" &&
-            "Explore Warehouse"}
-
-          {currentScene ===
-            "loadingarea" &&
-            "Explore Loading Area"}
-        </button>
-      )}
-
-      <SceneSelector
+      <SceneDrawer
         scenes={scenes}
         currentScene={currentScene}
         onSceneChange={setCurrentScene}

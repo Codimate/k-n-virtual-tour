@@ -9,15 +9,6 @@ export default function SceneQuickPanel({ sceneId }) {
 
   if (!content) return null;
 
-  // Use the scene's gallery or fall back to high-quality panoramas if only 1 or empty
-  const galleryImages = content.gallery && content.gallery.length > 1
-    ? content.gallery
-    : [
-        "/panoramas/main1.webp",
-        "/panoramas/main2.webp",
-        "/panoramas/main3.webp"
-      ];
-
   return (
     <div className={`scene-quick-panel ${isDark ? "dark" : "light"} ${isExpanded ? "expanded" : ""}`}>
       <div className="panel-header">
@@ -59,21 +50,6 @@ export default function SceneQuickPanel({ sceneId }) {
           <p className="panel-description">
             {content.overview?.text || "No summary available for this location."}
           </p>
-
-          <div className="panel-gallery">
-            <h4>Gallery</h4>
-            <div className="gallery-grid">
-              {galleryImages.map((img, idx) => (
-                <img 
-                  key={idx} 
-                  src={img} 
-                  alt={`${content.title} visual ${idx + 1}`}
-                  className="gallery-img"
-                  loading="lazy"
-                />
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </div>

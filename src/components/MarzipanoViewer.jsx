@@ -23,6 +23,7 @@ export default function MarzipanoViewer({
   const onInfoOpenRef =
     useRef(onInfoOpen);
 
+  // eslint-disable-next-line no-unused-vars
   const [position, setPosition] =
     useState({
       yaw: 0,
@@ -151,6 +152,11 @@ export default function MarzipanoViewer({
               ? "kn-hotspot kn-hotspot-info"
               : "kn-hotspot";
 
+          const iconMarkup =
+            hotspot.type === "info"
+              ? `<svg viewBox="0 0 24 24" class="hotspot-pin-svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>`
+              : `<svg viewBox="0 0 24 24" class="hotspot-pin-svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
+
           hotspotElement.innerHTML = `
             <div class="kn-hotspot-anchor">
 
@@ -160,7 +166,9 @@ export default function MarzipanoViewer({
                   ${hotspot.label}
                 </div>
 
-                <div class="kn-hotspot-pointer"></div>
+                <div class="kn-hotspot-icon">
+                  ${iconMarkup}
+                </div>
 
               </div>
 

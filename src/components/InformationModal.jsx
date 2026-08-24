@@ -4,7 +4,6 @@ import { locationContent } from "../data/locationContent";
 import "../styles/information-modal.css";
 
 import InformationCard from "./InformationCard";
-import StatisticsSection from "./StatisticsSection";
 import ProcessSection from "./ProcessSection";
 import GallerySection from "./GallerySection";
 import VideoSection from "./VideoSection";
