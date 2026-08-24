@@ -9,6 +9,14 @@ export default function SceneQuickPanel({ sceneId }) {
 
   if (!content) return null;
 
+  /* ── Normalize videos to support 1, 2, or multiple videos ───── */
+  const rawVideos = content.videos || content.video;
+  const videosList = Array.isArray(rawVideos)
+    ? rawVideos
+    : rawVideos
+    ? [rawVideos]
+    : [];
+
   return (
     <div className={`scene-quick-panel ${isDark ? "dark" : "light"} ${isExpanded ? "expanded" : ""}`}>
       <div className="panel-header">
@@ -32,18 +40,24 @@ export default function SceneQuickPanel({ sceneId }) {
       </div>
 
       <div className="panel-content custom-scrollbar">
-        {content.video && (
-          <div className="panel-video-wrapper">
-            <video
-              src={content.video}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="panel-video"
-            />
-          </div>
-        )}
+        {/* Render all videos in the list */}
+        {videosList.map((vidSrc, idx) => {
+          // If vidSrc is an object with a .src property, use that; otherwise use vidSrc directly
+          const src = typeof vidSrc === "object" ? vidSrc.src || vidSrc.url : vidSrc;
+          
+          return (
+            <div className="panel-video-wrapper" key={idx} style={{ marginBottom: idx < videosList.length - 1 ? "12px" : "0" }}>
+              <video
+                src={src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="panel-video"
+              />
+            </div>
+          );
+        })}
 
         <div className="panel-body">
           <p className="panel-subtitle">{content.subtitle}</p>
