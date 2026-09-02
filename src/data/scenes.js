@@ -36,6 +36,7 @@ export const scenes = {
     id: "cfs",
 
     title: "Entrance Gate",
+    audio: "/audio/entrance.mp3",
 
     description: "Container Freight Station",
 
@@ -77,6 +78,8 @@ export const scenes = {
     id: "warehouse",
 
     title: "Warehousing space",
+
+    audio: "/audio/warehouse.mp3",
 
     description: "Warehouse Operations",
 
@@ -144,6 +147,7 @@ export const scenes = {
   loadingarea: {
     id: "loadingarea",
     title: "Loading Area",
+    audio: "/audio/loading.mp3",
     description: "Loading and Dispatch Area",
     image: "/panoramas/loadingarea.webp",
     thumbnail: "/panoramas/thumbnails/loadingarea.webp",
@@ -176,6 +180,7 @@ export const scenes = {
   unloading: {
     id: "unloading",
     title: "Unloading Area",
+    audio: "/audio/unloading.mp3",
     description: "Container & Cargo Receiving",
     image: "/panoramas/unloadingarea.webp",
     thumbnail: "/panoramas/thumbnails/unloadingarea.webp",
@@ -216,6 +221,7 @@ export const scenes = {
 
   documentation: {
     id: "documentation",
+    audio: "/audio/office.mp3",
     title: "Documentation Room",
     description: "Customs & Processing Center",
     image: "/panoramas/Documentationroom.webp",

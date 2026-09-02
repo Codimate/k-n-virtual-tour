@@ -1,10 +1,9 @@
-
 import {
   useEffect,
   useRef,
   useState,
 } from "react";
-
+import AudioPlayer from "../components/AudioPlayer";
 import Marzipano from "marzipano";
 import "../styles/hotspot.css";
 
@@ -139,7 +138,7 @@ export default function MarzipanoViewer({
         });
 
       // Create Hotspots
-      scene.hotspots.forEach(
+      scene.hotspots?.forEach(
         (hotspot) => {
           const hotspotElement =
             document.createElement(
@@ -291,66 +290,8 @@ export default function MarzipanoViewer({
         }}
       />
 
-      {/* Developer Tool */}
-      {/* <div
-        style={{
-          position: "fixed",
-          top: "90px",
-          right: "20px",
-          zIndex: 9999,
-          background:
-            "rgba(0,0,0,.85)",
-          color: "white",
-          padding: "14px",
-          borderRadius: "12px",
-          minWidth: "190px",
-          fontSize: "14px",
-          backdropFilter:
-            "blur(10px)",
-        }}
-      >
-        <div>
-          <strong>
-            Yaw:
-          </strong>{" "}
-          {position.yaw}
-        </div>
-
-        <div
-          style={{
-            marginTop: "6px",
-          }}
-        >
-          <strong>
-            Pitch:
-          </strong>{" "}
-          {position.pitch}
-        </div>
-
-        <button
-          style={{
-            marginTop: "12px",
-            width: "100%",
-            padding: "10px",
-            border: "none",
-            borderRadius:
-              "8px",
-            cursor: "pointer",
-            fontWeight: 600,
-          }}
-          onClick={() => {
-            navigator.clipboard.writeText(
-              `yaw: ${position.yaw}, pitch: ${position.pitch}`
-            );
-
-            alert(
-              "Position copied!"
-            );
-          }}
-        >
-          Copy Position
-        </button>
-      </div> */}
+      {/* Dynamic Audio Controls for active scene */}
+      <AudioPlayer audioSrc={scene?.audio} />
     </>
   );
 }
