@@ -12,6 +12,87 @@
 
 export const locationContent = {
   /* ──────────────────────────────────────────────────────────
+   * ENTRANCE GATE / CFS OPERATIONS
+   * ────────────────────────────────────────────────────────── */
+  cfs: {
+    id: "cfs",
+    title: "KN CFS Polaris – Entrance Gate",
+    subtitle: "Container Freight Station & Main Access Control",
+    accent: "#0054a6", // K+N Blue
+
+    overview: {
+      icon: "🏭",
+      text: "Kuehne+Nagel CFS strategically locates just 14 kilometres from Nhava Sheva port. It is one of the biggest and stronger CFS operators in Nhava Sheva area, with a 75-acre facility with around 3,000 ground slots and capacity exceeding 30,000 TEUs. Polaris CFS has 3 full-rake rail sidings, enabling direct movement of containers between JNPT and inland container depots (ICDs), which reduces road dependency, transit time, and congestion.",
+    },
+
+    features: [
+      {
+        icon: "🚛",
+        title: "Automated Gate Clearance",
+        description:
+          "ANPR camera systems automatically identify incoming trucks and verify booking details before granting entry.",
+      },
+      {
+        icon: "🛡️",
+        title: "Security Verification",
+        description:
+          "24/7 security checkpoint verifying container seals, driver credentials, and safety compliance.",
+      },
+      {
+        icon: "⚖️",
+        title: "Weighbridge Integration",
+        description:
+          "Integrated automated weighbridges record container and vehicle gross weights immediately upon entry.",
+      },
+      {
+        icon: "📱",
+        title: "Digital Slot Booking",
+        description:
+          "Pre-booked arrival time slots optimize truck turnaround times and reduce gate congestion.",
+      },
+    ],
+
+    process: [
+      {
+        step: 1,
+        title: "Approach & ANPR Scan",
+        description: "Truck license plates and container numbers are automatically scanned at entry.",
+      },
+      {
+        step: 2,
+        title: "Security Check",
+        description: "Driver ID and container seal numbers are verified against manifest data.",
+      },
+      {
+        step: 3,
+        title: "Weighing & Directing",
+        description: "Gross weight is captured and the driver is directed to the designated unloading bay.",
+      },
+      {
+        step: 4,
+        title: "Gate Pass Issuance",
+        description: "Digital pass generated for seamless departure clearance post-loading/unloading.",
+      },
+    ],
+
+    stats: [
+      { value: "24/7", label: "Operations", icon: "⏰" },
+      { value: "50K+", label: "Containers / Year", icon: "📦" },
+      { value: "< 3 mins", label: "Avg. Check-In", icon: "⏱️" },
+      { value: "100%", label: "Tracked Cargo", icon: "📍" },
+    ],
+
+    gallery: ["/panoramas/main2.JPG"],
+    video: "/videos/Entrence_Video.mp4",
+
+    additionalInfo: {
+      title: "Facility Capabilities",
+      content:
+        "The entrance gate integrates documentation, surveillance, unloading, loading, and warehouse operations into a unified logistics ecosystem designed for efficiency, security, and real-time visibility.",
+    },
+  },
+
+  /* ──────────────────────────────────────────────────────────
    * DOCUMENTATION ROOM
    * ────────────────────────────────────────────────────────── */
   documentation: {
@@ -22,7 +103,7 @@ export const locationContent = {
 
     overview: {
       icon: "📋",
-      text: "The Documentation Room is the nerve center of our freight operations. Every shipment passing through KN CFS Polaris is meticulously tracked, verified, and cleared through this state-of-the-art facility. Our team handles customs declarations, bills of lading, certificates of origin, and compliance documentation with industry-leading accuracy and speed.",
+      text: "This is Kuehne+Nagel Office with dedicated KN employees and Surveyor team ensuring smooth shipment management, documentation, and the precise delivery of every shipment. Beyond simply processing paperwork, they serve as the digital hub, working on KN WMS to provide visibility and the first quality gateway for our customers' goods.",
     },
 
     features: [
@@ -83,7 +164,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/doc_room_gallery.png"],
-    video: "/videos/Unloading1.mp4",
+    video: "/videos/office.mp4",
 
     additionalInfo: {
       title: "Compliance & Certifications",
@@ -164,7 +245,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/surveillance_gallery.png"],
-    video: "/videos/Unloading1.mp4",
+    video: "/videos/Survi.mp4",
 
     additionalInfo: {
       title: "Security Certifications",
@@ -245,7 +326,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/hvc_gallery.png"],
-    video: "/videos/Unloading1.mp4",
+    video: "/videos/hvc.mp4",
 
     additionalInfo: {
       title: "Insurance & Liability",
@@ -253,88 +334,95 @@ export const locationContent = {
         "All high-value cargo is covered under our comprehensive marine and warehouse insurance policy. We maintain dedicated liability coverage for goods valued up to $10M per shipment, with additional coverage available on request.",
     },
   },
+/* ──────────────────────────────────────────────────────────
+ * UNLOADING AREA
+ * ────────────────────────────────────────────────────────── */
+unloading: {
+  id: "unloading",
+  title: "Unloading Area",
+  subtitle: "Efficient Container & Cargo Receiving Operations",
+  accent: "#ff9f0a", // iOS orange
 
-  /* ──────────────────────────────────────────────────────────
-   * UNLOADING AREA
-   * ────────────────────────────────────────────────────────── */
-  unloading: {
-    id: "unloading",
-    title: "Unloading Area",
-    subtitle: "Efficient Container & Cargo Receiving Operations",
-    accent: "#ff9f0a", // iOS orange
-
-    overview: {
-      icon: "🏗️",
-      text: "The Unloading Area is the first point of contact for all incoming freight at KN CFS Polaris. Designed for high-throughput operations, this zone handles containers from trucks, trailers, and rail connections. Our team uses a combination of heavy-duty forklifts, reach stackers, and dock levelers to efficiently unload cargo while maintaining strict safety and quality standards.",
-    },
-
-    features: [
-      {
-        icon: "🚛",
-        title: "Multi-Dock Bays",
-        description:
-          "12 dedicated dock bays with hydraulic levelers accommodate vehicles from small vans to 40ft container trucks.",
-      },
-      {
-        icon: "⚖️",
-        title: "Weighbridge System",
-        description:
-          "Integrated weighbridge captures gross and tare weights for every vehicle, ensuring accurate cargo records.",
-      },
-      {
-        icon: "📱",
-        title: "Digital Check-In",
-        description:
-          "Drivers use a mobile app for appointment scheduling, gate pass generation, and real-time status updates.",
-      },
-      {
-        icon: "🔬",
-        title: "Quality Inspection",
-        description:
-          "Incoming cargo undergoes visual and dimensional inspection with photographic documentation of condition.",
-      },
+  overview: {
+    icon: "🏗️",
+    paragraph1: "The unloading platform is the first precision gateway for cargo entering our secure storage area. Through the combination of people, process, and technology, PDA operations, we ensure this stage is safe, efficient, accurate, and transparent, truly achieving your cargo in our hands.",
+    paragraph2: "Once the cargo is received at the CFS, shipping documents like, invoice, packing list and shipping bill are checked. Physical verification of the cartons is conducted, which includes:",
+    points: [
+      "Number of cartons",
+      "Check cartons labels and markings",
+      "Measuring, weighment & sorting basis requirement",
+      "Outer Audit / Cargo Condition Check, which will include Examination for torn, crushed, wet, tampered, or damaged cartons",
+      "Recording of discrepancies and damages"
     ],
-
-    process: [
-      {
-        step: 1,
-        title: "Arrival",
-        description: "Vehicles are checked in, weighed, and directed to assigned dock bays.",
-      },
-      {
-        step: 2,
-        title: "Unload",
-        description: "Cargo is carefully unloaded using appropriate equipment based on type and weight.",
-      },
-      {
-        step: 3,
-        title: "Inspect",
-        description: "Each item is inspected for damage, counted, and matched against shipping documents.",
-      },
-      {
-        step: 4,
-        title: "Stage",
-        description: "Verified cargo is staged in designated zones for putaway into the warehouse.",
-      },
-    ],
-
-    stats: [
-      { value: "150+", label: "Trucks / Day", icon: "🚛" },
-      { value: "12", label: "Dock Bays", icon: "🏭" },
-      { value: "< 45 min", label: "Avg. Turnaround", icon: "⏱️" },
-      { value: "98.5%", label: "On-Time Unloads", icon: "📊" },
-    ],
-
-    gallery: ["/images/unloading_img1.JPG" ,"/images/unloading_img2.JPG"],
-    video: ["/videos/IMG_3078.MOV","/videos/IMG_3080.MOV"],
-
-    additionalInfo: {
-      title: "Safety Standards",
-      content:
-        "The unloading area maintains a zero-incident safety record. All personnel are required to wear PPE including high-visibility vests, steel-toe boots, and hard hats. Speed limits are enforced via automated monitoring and regular safety drills are conducted monthly.",
-    },
+    footer: "Finally, Issuance of a cargo receipt or discrepancy report."
   },
 
+  features: [
+    {
+      icon: "🚛",
+      title: "Multi-Dock Bays",
+      description:
+        "12 dedicated dock bays with hydraulic levelers accommodate vehicles from small vans to 40ft container trucks.",
+    },
+    {
+      icon: "⚖️",
+      title: "Weighbridge System",
+      description:
+        "Integrated weighbridge captures gross and tare weights for every vehicle, ensuring accurate cargo records.",
+    },
+    {
+      icon: "📱",
+      title: "Digital Check-In",
+      description:
+        "Drivers use a mobile app for appointment scheduling, gate pass generation, and real-time status updates.",
+    },
+    {
+      icon: "🔬",
+      title: "Quality Inspection",
+      description:
+        "Incoming cargo undergoes visual and dimensional inspection with photographic documentation of condition.",
+    },
+  ],
+
+  process: [
+    {
+      step: 1,
+      title: "Arrival",
+      description: "Vehicles are checked in, weighed, and directed to assigned dock bays.",
+    },
+    {
+      step: 2,
+      title: "Unload",
+      description: "Cargo is carefully unloaded using appropriate equipment based on type and weight.",
+    },
+    {
+      step: 3,
+      title: "Inspect",
+      description: "Each item is inspected for damage, counted, and matched against shipping documents.",
+    },
+    {
+      step: 4,
+      title: "Stage",
+      description: "Verified cargo is staged in designated zones for putaway into the warehouse.",
+    },
+  ],
+
+  stats: [
+    { value: "150+", label: "Trucks / Day", icon: "🚛" },
+    { value: "12", label: "Dock Bays", icon: "🏭" },
+    { value: "< 45 min", label: "Avg. Turnaround", icon: "⏱️" },
+    { value: "98.5%", label: "On-Time Unloads", icon: "📊" },
+  ],
+
+  gallery: ["/images/unloading_img1.JPG", "/images/unloading_img2.JPG"],
+  video: ["/videos/IMG_3078.MOV", "/videos/IMG_3080.MOV"],
+
+  additionalInfo: {
+    title: "Safety Standards",
+    content:
+      "The unloading area maintains a zero-incident safety record. All personnel are required to wear PPE including high-visibility vests, steel-toe boots, and hard hats. Speed limits are enforced via automated monitoring and regular safety drills are conducted monthly.",
+  },
+},
   /* ──────────────────────────────────────────────────────────
    * LOADING AREA
    * ────────────────────────────────────────────────────────── */
@@ -346,7 +434,7 @@ export const locationContent = {
 
     overview: {
       icon: "📦",
-      text: "The Loading Area handles all outbound shipments from KN CFS Polaris. This highly organized zone manages the final stage of the logistics chain — from pick-and-pack operations to truck loading and dispatch. Our team ensures every shipment is properly consolidated, labeled, and loaded according to route optimization plans for maximum delivery efficiency.",
+      text: "The stuffing process is the final physical gateway before cargo leaves our control for long-term transport. Our goal is to ensure that goods are loaded in the safest, most stable, and most economical manner through rigorous standards, and standardized operations. All container load plans are imported from the Kuehne Nagel WMS.",
     },
 
     features: [
@@ -416,155 +504,64 @@ export const locationContent = {
     },
   },
 
+  /* ──────────────────────────────────────────────────────────
+   * SKYVIEW
+   * ────────────────────────────────────────────────────────── */
   skyview: {
-  id: "skyview",
+    id: "skyview",
+    title: "K+N Facility Overview",
+    subtitle: "Aerial Perspective of the Logistics Campus",
+    accent: "#0a84ff",
 
-  title: "K+N Facility Overview",
+    overview: {
+      icon: "🚁",
+      text: "The drone view provides a complete overview of the KN CFS Polaris facility, highlighting key operational zones, warehouse infrastructure, cargo movement areas, and transportation connectivity.",
+    },
 
-  subtitle:
-    "Aerial Perspective of the Logistics Campus",
+    stats: [
+      { value: "360°", label: "Facility Visibility", icon: "👁️" },
+      { value: "24/7", label: "Operations", icon: "⏰" },
+      { value: "100%", label: "Cargo Tracking", icon: "📦" },
+      { value: "ISO", label: "Standards", icon: "✅" },
+    ],
 
-  accent: "#0a84ff",
+    gallery: ["/panoramas/main1.JPG"],
 
-  overview: {
-    icon: "🚁",
-    text:
-      "The drone view provides a complete overview of the KN CFS Polaris facility, highlighting key operational zones, warehouse infrastructure, cargo movement areas, and transportation connectivity."
+    additionalInfo: {
+      title: "Facility Overview",
+      content:
+        "The KN CFS Polaris facility is designed to support end-to-end logistics operations, including cargo handling, customs clearance, storage, consolidation, and dispatch.",
+    },
   },
 
-  stats: [
-    {
-      value: "360°",
-      label: "Facility Visibility",
-      icon: "👁️"
+  /* ──────────────────────────────────────────────────────────
+   * WAREHOUSE
+   * ────────────────────────────────────────────────────────── */
+  warehouse: {
+    id: "warehouse",
+    title: "Warehouse Operations",
+    subtitle: "Secure Storage & Inventory Management",
+    accent: "#30d158",
+
+    overview: {
+      icon: "🏢",
+      text: "Through systematic management we transform cargo from temporary receiving into secure, organized, and highly traceable inventory assets. In this process, goods transition from materials to precisely accessible, data-transparent, and absolutely secure assets. We feature 24/7 full CCTV coverage, infrared alarms, smoke detectors, and intelligent monitoring alert systems. This is the digital value we provide that goes beyond traditional warehousing.",
     },
-    {
-      value: "24/7",
-      label: "Operations",
-      icon: "⏰"
+
+    stats: [
+      { value: "24/7", label: "Operations", icon: "⏰" },
+      { value: "99.9%", label: "Inventory Accuracy", icon: "📊" },
+      { value: "Secure", label: "Storage Zones", icon: "🔒" },
+      { value: "Real-Time", label: "Tracking", icon: "📍" },
+    ],
+
+    gallery: ["/images/warehouse_img1.JPG", "/images/warehouse_img1.JPG"],
+    video: "/videos/warehouse_1.mp4",
+
+    additionalInfo: {
+      title: "Warehouse Overview",
+      content:
+        "The warehouse is equipped to support high-volume storage, inventory visibility, cargo segregation, and efficient movement of goods between inbound and outbound logistics operations.",
     },
-    {
-      value: "100%",
-      label: "Cargo Tracking",
-      icon: "📦"
-    },
-    {
-      value: "ISO",
-      label: "Standards",
-      icon: "✅"
-    }
-  ],
-
-  gallery: [
-    "/panoramas/main1.JPG"
-  ],
-
-  additionalInfo: {
-    title: "Facility Overview",
-    content:
-      "The KN CFS Polaris facility is designed to support end-to-end logistics operations, including cargo handling, customs clearance, storage, consolidation, and dispatch."
-  }
-},
-
-cfs: {
-  id: "cfs",
-
-  title: "KN CFS Polaris",
-
-  subtitle:
-    "Container Freight Station Operations",
-
-  accent: "#0054a6",
-
-  overview: {
-    icon: "🏭",
-    text:
-      "KN CFS Polaris serves as the central freight handling hub for cargo receiving, customs processing, secure storage, consolidation, deconsolidation, and dispatch operations."
   },
-
-  stats: [
-    {
-      value: "24/7",
-      label: "Operations",
-      icon: "⏰"
-    },
-    {
-      value: "50K+",
-      label: "Containers / Year",
-      icon: "📦"
-    },
-    {
-      value: "100%",
-      label: "Tracked Cargo",
-      icon: "📍"
-    },
-    {
-      value: "ISO",
-      label: "Compliant",
-      icon: "✅"
-    }
-  ],
-
-  gallery: [
-    "/panoramas/main2.JPG"
-  ],
-
-  additionalInfo: {
-    title: "Facility Capabilities",
-    content:
-      "The facility integrates documentation, surveillance, unloading, loading, and warehouse operations into a unified logistics ecosystem designed for efficiency, security, and visibility."
-  }
-},
-
-warehouse: {
-  id: "warehouse",
-
-  title: "Warehouse Operations",
-
-  subtitle:
-    "Secure Storage & Inventory Management",
-
-  accent: "#30d158",
-
-  overview: {
-    icon: "🏢",
-    text:
-      "The warehouse facility supports storage, inventory management, cargo segregation, and value-added logistics services while maintaining high operational efficiency and security standards."
-  },
-
-  stats: [
-    {
-      value: "24/7",
-      label: "Operations",
-      icon: "⏰"
-    },
-    {
-      value: "99.9%",
-      label: "Inventory Accuracy",
-      icon: "📊"
-    },
-    {
-      value: "Secure",
-      label: "Storage Zones",
-      icon: "🔒"
-    },
-    {
-      value: "Real-Time",
-      label: "Tracking",
-      icon: "📍"
-    }
-  ],
-
-  gallery: [
-    "/images/warehouse_img1.JPG",
-    "/images/warehouse_img1.JPG"
-  ],
-  video: "/videos/warehouse_1.mp4",
-
-  additionalInfo: {
-    title: "Warehouse Overview",
-    content:
-      "The warehouse is equipped to support high-volume storage, inventory visibility, cargo segregation, and efficient movement of goods between inbound and outbound logistics operations."
-  }
-},
 };

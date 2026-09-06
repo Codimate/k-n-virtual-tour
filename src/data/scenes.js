@@ -1,25 +1,10 @@
-/**
- * scenes.js
- * ─────────
- * Scene definitions for the 360° virtual tour.
- *
- * Only scenes with REAL panorama images are kept as navigable scenes.
- * Locations without dedicated panoramas use type: "info" hotspots,
- * which open the InformationModal overlay instead of navigating.
- */
-
 export const scenes = {
   skyview: {
     id: "skyview",
-
     title: "KN CFS – Polaris (Aerial view)",
-
     description: "K+N Facility Overview",
-
     image: "/panoramas/main1.webp",
-
     thumbnail: "/panoramas/thumbnails/skyview.webp",
-
     hotspots: [
       {
         id: "cfs",
@@ -34,26 +19,20 @@ export const scenes = {
 
   cfs: {
     id: "cfs",
-
     title: "Entrance Gate",
-    audio: "/audio/entrance.mp3",
-
+    audio: "/audio/entrence_audio.mp3",
     description: "Container Freight Station",
-
     image: "/panoramas/newmain.jpg",
-
     thumbnail: "/panoramas/thumbnails/cfs.webp",
-
     hotspots: [
       {
-        id: "Warehousing space",
+        id: "Warehousing space",          
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: -0.450,
+        yaw: -0.45,
         pitch: 0.056,
       },
-
       {
         id: "unloading",
         type: "scene",
@@ -62,68 +41,60 @@ export const scenes = {
         yaw: -1.114,
         pitch: 0.007,
       },
-
-    
       {
         id: "drone",
         type: "scene",
         label: "🚁 Drone View",
         target: "skyview",
-        yaw: -1.741, pitch: -0.638
+        yaw: -1.741,
+        pitch: -0.638,
       },
     ],
   },
 
   warehouse: {
     id: "warehouse",
-
     title: "Warehousing space",
-
     audio: "/audio/warehouse.mp3",
-
     description: "Warehouse Operations",
-
     image: "/panoramas/main3.webp",
-
     thumbnail: "/panoramas/thumbnails/warehouse.webp",
-
     hotspots: [
       {
         id: "unloading",
         type: "scene",
         label: "Unloading Area",
         target: "unloading",
-        yaw: -1.060, 
+        yaw: -1.06,
         pitch: 0.126,
       },
-
       {
         id: "documentation",
         type: "scene",
         label: "KN office – Documentation Processing Centre",
         target: "documentation",
-        yaw: -2.060, 
-        pitch: 0.190,
+        yaw: -2.06,
+        pitch: 0.19,
       },
-
       {
         id: "surveillance",
         type: "scene",
         label: "Quality Room",
         target: "surveillance",
-         yaw: -1.820, 
-        pitch: 0.210,
+        yaw: -1.82,
+        pitch: 0.21,
       },
-
       {
         id: "hvc",
-        type: "scene",
+        type: "info",
         label: "High Value Cargo Space",
         target: "highvaluecargo",
         yaw: 2.3,
-        pitch: 0.120,
+        pitch: 0.12,
+        targetYaw: 2.3,
+        targetPitch: 0.12,
+        targetFov: (40 * Math.PI) / 180,
       },
-
       {
         id: "loading",
         type: "scene",
@@ -132,13 +103,12 @@ export const scenes = {
         yaw: 1.0,
         pitch: 0.1,
       },
-
       {
         id: "back-cfs",
         type: "scene",
         label: "← KN CFS Entrance",
         target: "cfs",
-        yaw: -1.630, 
+        yaw: -1.63,
         pitch: 0.126,
       },
     ],
@@ -147,7 +117,7 @@ export const scenes = {
   loadingarea: {
     id: "loadingarea",
     title: "Loading Area",
-    audio: "/audio/loading.mp3",
+    audio: "/audio/loading_audio.mp3",
     description: "Loading and Dispatch Area",
     image: "/panoramas/loadingarea.webp",
     thumbnail: "/panoramas/thumbnails/loadingarea.webp",
@@ -157,14 +127,16 @@ export const scenes = {
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: 1.317, pitch: 0.865
+        yaw: 1.317,
+        pitch: 0.865,
       },
       {
         id: "cfs",
         type: "scene",
         label: "KN CFS Polaris",
         target: "cfs",
-        yaw: 1.317, pitch: 0.265
+        yaw: 1.317,
+        pitch: 0.265,
       },
       {
         id: "drone",
@@ -182,7 +154,7 @@ export const scenes = {
     title: "Unloading Area",
     audio: "/audio/unloading.mp3",
     description: "Container & Cargo Receiving",
-    image: "/panoramas/unloadingarea.webp",
+    image: "/panoramas/unloadingarea2.jpeg",
     thumbnail: "/panoramas/thumbnails/unloadingarea.webp",
     hotspots: [
       {
@@ -190,14 +162,16 @@ export const scenes = {
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: -2.807, pitch: 0.329
+        yaw: -2.807,
+        pitch: 0.329,
       },
       {
         id: "cfs",
         type: "scene",
         label: "KN CFS Polaris",
         target: "cfs",
-        yaw: -0.479, pitch: 0.202
+        yaw: -0.479,
+        pitch: 0.202,
       },
     ],
   },
@@ -214,14 +188,15 @@ export const scenes = {
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: -1.850, pitch: 0.329
-      }, 
+        yaw: -1.85,
+        pitch: 0.329,
+      },
     ],
   },
 
   documentation: {
     id: "documentation",
-    audio: "/audio/office.mp3",
+    audio: "/audio/office_audio.mp3",
     title: "Documentation Room",
     description: "Customs & Processing Center",
     image: "/panoramas/Documentationroom.webp",
@@ -232,26 +207,20 @@ export const scenes = {
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: -2.661, pitch: 0.009
+        yaw: -2.661,
+        pitch: 0.009,
       },
     ],
   },
 
+  // Virtual target for drawer selection and quick panel info
   highvaluecargo: {
     id: "highvaluecargo",
+    isVirtual: true,
     title: "High Value Cargo",
     description: "Secure Premium Cargo Vault",
     image: "/panoramas/main3.webp",
     thumbnail: "/panoramas/thumbnails/highvaluecargo.webp",
-    hotspots: [
-      {
-        id: "warehouse",
-        type: "scene",
-        label: "Warehouse",
-        target: "warehouse",
-        yaw: 0.0,
-        pitch: 0.1,
-      },
-    ],
+    hotspots: [],
   },
 };

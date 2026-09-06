@@ -17,6 +17,8 @@ export default function SceneQuickPanel({ sceneId }) {
     ? [rawVideos]
     : [];
 
+  const overviewText = content.overview?.text;
+
   return (
     <div className={`scene-quick-panel ${isDark ? "dark" : "light"} ${isExpanded ? "expanded" : ""}`}>
       <div className="panel-header">
@@ -60,11 +62,43 @@ export default function SceneQuickPanel({ sceneId }) {
         })}
 
         <div className="panel-body">
-          <p className="panel-subtitle">{content.subtitle}</p>
-          <p className="panel-description">
-            {content.overview?.text || "No summary available for this location."}
-          </p>
-        </div>
+  {content.subtitle && <p className="panel-subtitle">{content.subtitle}</p>}
+
+  {/* Paragraph 1 */}
+  {content.overview?.paragraph1 && (
+    <p className="panel-description" style={{ marginBottom: "12px" }}>
+      {content.overview.paragraph1}
+    </p>
+  )}
+
+  {/* Paragraph 2 */}
+  {content.overview?.paragraph2 && (
+    <p className="panel-description" style={{ marginBottom: "8px" }}>
+      {content.overview.paragraph2}
+    </p>
+  )}
+
+  {/* Bullet Points List */}
+  {Array.isArray(content.overview?.points) && (
+    <ul className="panel-description-list" style={{ paddingLeft: "20px", marginBottom: "12px" }}>
+      {content.overview.points.map((point, idx) => (
+        <li key={idx} style={{ marginBottom: "6px" }}>{point}</li>
+      ))}
+    </ul>
+  )}
+
+  {/* Footer Paragraph */}
+  {content.overview?.footer && (
+    <p className="panel-description" style={{ marginTop: "8px" }}>
+      {content.overview.footer}
+    </p>
+  )}
+
+  {/* Fallback for simple text overview */}
+  {typeof content.overview?.text === "string" && (
+    <p className="panel-description">{content.overview.text}</p>
+  )}
+</div>
       </div>
     </div>
   );
