@@ -495,7 +495,7 @@ unloading: {
     ],
 
     gallery: ["/images/unloading_gallery.png"],
-    video: "/videos/loading_1.mp4",
+    video: "/videos/loading_video.mp4",
 
     additionalInfo: {
       title: "Sustainability Initiatives",
