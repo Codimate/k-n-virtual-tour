@@ -22,7 +22,7 @@ export const scenes = {
     title: "Entrance Gate",
     audio: "/audio/entrence_audio.mp3",
     description: "Container Freight Station",
-    image: "/panoramas/newmain.jpg",
+    image: "/panoramas/newmain_compressed.webp",
     thumbnail: "/panoramas/thumbnails/cfs.webp",
     hotspots: [
       {
@@ -183,7 +183,7 @@ export const scenes = {
     audio: "/audio/office_audio.mp3",
     title: "Documentation Room",
     description: "Customs & Processing Center",
-    image: "/panoramas/Documentationroom_compressed",
+    image: "/panoramas/Documentationroom_compressed.webp",
     thumbnail: "/panoramas/thumbnails/Documentationroom_compressed.webp",
     hotspots: [
       {

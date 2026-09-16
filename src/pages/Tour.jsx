@@ -27,22 +27,16 @@ export default function Tour() {
   const activePanelId = overlayLocation || currentScene;
 
   return (
-    <>
-      <Logo />
-
-      {/* Quick Information Panel */}
-      {[
-        "cfs",
-        "warehouse",
-        "loadingarea",
-        "surveillance",
-        "documentation",
-        "unloading",
-        "highvaluecargo",
-      ].includes(activePanelId) && (
-        <SceneQuickPanel sceneId={activePanelId} />
-      )}
-
+    <div 
+      style={{ 
+        position: "fixed", 
+        inset: 0, 
+        width: "100%", 
+        height: "100%", 
+        overflow: "hidden" 
+      }}
+    >
+      {/* 1. Base Layer: Marzipano Canvas (Handles 360 drag) */}
       <MarzipanoViewer
         scene={scenes[currentScene]}
         onSceneChange={handleSceneChange}
@@ -51,21 +45,55 @@ export default function Tour() {
         overlayLocation={overlayLocation}
       />
 
-      <SceneDrawer
-        scenes={scenes}
-        currentScene={currentScene}
-        overlayLocation={overlayLocation}
-        onSceneChange={handleSceneChange}
-        onSelectOverlayInfo={setOverlayLocation}
-      />
+      {/* 2. Floating UI Overlay Layer (Click-through enabled) */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          pointerEvents: "none", // Allows drags on transparent areas to hit the 360 viewer
+          zIndex: 10,
+        }}
+      >
+        <div style={{ pointerEvents: "auto" }}>
+          <Logo />
+        </div>
 
-      {/* Information Modal */}
-      {activeLocation && (
-        <InformationModal
-          locationId={activeLocation}
-          onClose={() => setActiveLocation(null)}
-        />
-      )}
-    </>
+        {/* Quick Information Panel */}
+        {[
+          "cfs",
+          "warehouse",
+          "loadingarea",
+          "surveillance",
+          "documentation",
+          "unloading",
+          "highvaluecargo",
+        ].includes(activePanelId) && (
+          <div style={{ pointerEvents: "auto" }}>
+            <SceneQuickPanel sceneId={activePanelId} />
+          </div>
+        )}
+
+        {/* Scene Drawer (Left Side Menu) */}
+        <div style={{ pointerEvents: "auto" }}>
+          <SceneDrawer
+            scenes={scenes}
+            currentScene={currentScene}
+            overlayLocation={overlayLocation}
+            onSceneChange={handleSceneChange}
+            onSelectOverlayInfo={setOverlayLocation}
+          />
+        </div>
+
+        {/* Information Modal */}
+        {activeLocation && (
+          <div style={{ pointerEvents: "auto" }}>
+            <InformationModal
+              locationId={activeLocation}
+              onClose={() => setActiveLocation(null)}
+            />
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

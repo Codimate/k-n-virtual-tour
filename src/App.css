@@ -1,4 +1,18 @@
+/* Force strict viewport clipping at the root level */
+html, 
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important; /* Disables outer scrollbars completely */
+  position: fixed; /* Prevents mobile rubber-banding / bounce scrolling */
+  inset: 0;
+}
+
 #root {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }

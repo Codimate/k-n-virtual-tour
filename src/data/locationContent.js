@@ -326,7 +326,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/hvc_gallery.png"],
-    video: "/videos/HVC2.mp4",
+    video: "/videos/hvc.mp4",
 
     additionalInfo: {
       title: "Insurance & Liability",
@@ -415,7 +415,7 @@ unloading: {
   ],
 
   gallery: ["/images/unloading_img1.JPG", "/images/unloading_img2.JPG"],
-  video: ["/videos/IMG_3078.MOV", "/videos/IMG_3080.MOV"],
+  video: ["/videos/unloading_vid_1.mp4", "/videos/unloading_vid_2.mp4"],
 
   additionalInfo: {
     title: "Safety Standards",
