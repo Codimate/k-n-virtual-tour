@@ -69,10 +69,10 @@ export default function MarzipanoViewer({
     };
   }, []);
 
-  // Smooth Fade-In Function (Target volume: 30%)
+  // Smooth Fade-In Function (Target volume: 7%)
   const fadeInMusic = () => {
     if (!bgAudioRef.current) return;
-    const targetVolume = 0.07; // 30% volume
+    const targetVolume = 0.07;
     const step = 0.01;
     const intervalTime = 100; // Adjusts over ~3 seconds
 
@@ -323,46 +323,44 @@ export default function MarzipanoViewer({
         }}
       />
 
-      {/* Floating Mute/Unmute Button with White Background & Blue Icon */}
-<div
-  style={{
-    position: "fixed",
-    bottom: "90px",
-    right: "20px",
-    zIndex: 1000,
-  }}
->
-  <button
-    onClick={toggleMute}
-    title={isMuted ? "Unmute Ambient Music" : "Mute Ambient Music"}
-    style={{
-      width: "44px",
-      height: "44px",
-      borderRadius: "50%",
-      backgroundColor: "#ffffff",
-      border: "1px solid #e2e8f0",
-      color: "#0056b3",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-      transition: "all 0.2s ease-in-out",
-    }}
-  >
-    {isMuted ? (
-      /* Muted Music Icon (Blue) */
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-        <path d="M4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
-      </svg>
-    ) : (
-      /* Active Music Note Icon (Blue) */
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-      </svg>
-    )}
-  </button>
-</div>
+      {/* Floating Mute/Unmute Button */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "90px",
+          right: "20px",
+          zIndex: 1000,
+        }}
+      >
+        <button
+          onClick={toggleMute}
+          title={isMuted ? "Unmute Ambient Music" : "Mute Ambient Music"}
+          style={{
+            width: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            backgroundColor: "#ffffff",
+            border: "1px solid #e2e8f0",
+            color: "#0056b3",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+            transition: "all 0.2s ease-in-out",
+          }}
+        >
+          {isMuted ? (
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+            </svg>
+          )}
+        </button>
+      </div>
 
       {/* Voice Narrative Player */}
       <AudioPlayer audioSrc={scene?.audio} />

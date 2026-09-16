@@ -164,7 +164,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/doc_room_gallery.png"],
-    video: "/videos/office.mp4",
+    video: "/videos/office2.mp4",
 
     additionalInfo: {
       title: "Compliance & Certifications",
@@ -326,7 +326,7 @@ export const locationContent = {
     ],
 
     gallery: ["/images/hvc_gallery.png"],
-    video: "/videos/hvc.mp4",
+    video: "/videos/HVC2.mp4",
 
     additionalInfo: {
       title: "Insurance & Liability",

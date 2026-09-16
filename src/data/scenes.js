@@ -86,7 +86,7 @@ export const scenes = {
       },
       {
         id: "hvc",
-        type: "info",
+        type: "scene",
         label: "High Value Cargo Space",
         target: "highvaluecargo",
         yaw: 2.3,
@@ -119,7 +119,7 @@ export const scenes = {
     title: "Loading Area",
     audio: "/audio/loading_audio.mp3",
     description: "Loading and Dispatch Area",
-    image: "/panoramas/loadingarea.webp",
+    image: "/panoramas/loading2.jpg",
     thumbnail: "/panoramas/thumbnails/loadingarea.webp",
     hotspots: [
       {
@@ -127,24 +127,8 @@ export const scenes = {
         type: "scene",
         label: "Warehouse",
         target: "warehouse",
-        yaw: 1.317,
-        pitch: 0.865,
-      },
-      {
-        id: "cfs",
-        type: "scene",
-        label: "KN CFS Polaris",
-        target: "cfs",
-        yaw: 1.317,
-        pitch: 0.265,
-      },
-      {
-        id: "drone",
-        type: "scene",
-        label: "🚁 Drone View",
-        target: "skyview",
-        yaw: 1.4,
-        pitch: -0.3,
+        yaw: -1.5,
+        pitch: 0.3,
       },
     ],
   },
@@ -199,7 +183,7 @@ export const scenes = {
     audio: "/audio/office_audio.mp3",
     title: "Documentation Room",
     description: "Customs & Processing Center",
-    image: "/panoramas/Documentationroom.webp",
+    image: "/panoramas/loading2.JPG",
     thumbnail: "/panoramas/thumbnails/documentation.webp",
     hotspots: [
       {
