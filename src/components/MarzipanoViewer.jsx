@@ -4,7 +4,7 @@ import Marzipano from "marzipano";
 import "../styles/hotspot.css";
 
 // 1. Path to your background music file
-const BACKGROUND_MUSIC_SRC = "public/audio/corporateascent.mp3"; 
+const BACKGROUND_MUSIC_SRC = "/audio/corporateascent.mp3"; 
 
 export default function MarzipanoViewer({
   scene,
