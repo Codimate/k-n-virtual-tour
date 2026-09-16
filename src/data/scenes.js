@@ -119,8 +119,8 @@ export const scenes = {
     title: "Loading Area",
     audio: "/audio/loading_audio.mp3",
     description: "Loading and Dispatch Area",
-    image: "/panoramas/loading2.jpg",
-    thumbnail: "/panoramas/thumbnails/loadingarea.webp",
+    image: "/panoramas/loadingnew.webp",
+    thumbnail: "/panoramas/loadingnew.webp",
     hotspots: [
       {
         id: "warehouse",
