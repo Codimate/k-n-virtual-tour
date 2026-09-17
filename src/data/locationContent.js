@@ -178,13 +178,13 @@ export const locationContent = {
    * ────────────────────────────────────────────────────────── */
   surveillance: {
     id: "surveillance",
-    title: "Surveillance Room",
+    title: "Quality Check Room",
     subtitle: "24/7 Security Monitoring & Smart Analytics",
     accent: "#30d158", // iOS green
 
     overview: {
       icon: "🛡️",
-      text: "The Surveillance Room provides comprehensive security coverage for the entire KN CFS Polaris facility. Equipped with AI-powered video analytics, motion detection, and real-time alert systems, our security team monitors every zone around the clock. The facility uses enterprise-grade CCTV infrastructure with redundant storage and instant playback capabilities.",
+      text: "The Quality Check Cabin (QC Room) is a designated facility within the CFS where cargo undergoes physical inspection, quality verification, and examination prior to container stuffing. It is commonly used when customs authorities, surveyors, buyers' representatives, or quality inspectors need to inspect cargo before stuffing or release. All activities conducted in the QC Room are carried out only with the necessary customs authorization. The facility enables sample inspection and verification without requiring the entire shipment to be exposed or handled unnecessarily",
     },
 
     features: [
@@ -250,7 +250,7 @@ export const locationContent = {
     additionalInfo: {
       title: "Security Certifications",
       content:
-        "Our surveillance infrastructure meets TAPA FSR Level A standards — the highest security certification for freight and logistics facilities. All security personnel are trained and certified to international standards.",
+        "The Quality Check Cabin (QC Room) is a designated facility within the CFS where cargo undergoes physical inspection, quality verification, and examination prior to container stuffing. It is commonly used when customs authorities, surveyors, buyers' representatives, or quality inspectors need to inspect cargo before stuffing or release. All activities conducted in the QC Room are carried out only with the necessary customs authorization. The facility enables sample inspection and verification without requiring the entire shipment to be exposed or handled unnecessarily",
     },
   },
 

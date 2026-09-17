@@ -79,7 +79,7 @@ export const scenes = {
       {
         id: "surveillance",
         type: "scene",
-        label: "Quality Room",
+        label: "QC Room",
         target: "surveillance",
         yaw: -1.82,
         pitch: 0.21,
@@ -162,7 +162,8 @@ export const scenes = {
 
   surveillance: {
     id: "surveillance",
-    title: "Surveillance Room",
+    title: "QC Room",
+    audio: "/audio/QCroom.mp3",
     description: "24/7 Security Operations",
     image: "/panoramas/Survroom.webp",
     thumbnail: "/panoramas/thumbnails/surveillance.webp",
