@@ -265,7 +265,7 @@ export const locationContent = {
 
     overview: {
       icon: "💎",
-      text: "The High Value Cargo area is a specially fortified zone within the warehouse designed for storing and handling premium, sensitive, and high-value goods. From electronics and pharmaceuticals to luxury goods and aerospace components, this area provides maximum security with climate-controlled environments and restricted access protocols.",
+      text: "This is the High-Value Cargo storage area in the CFS, A secured facility designed to store valuable, sensitive, or high-risk cargo. It has restricted access, CCTV surveillance, controlled entry and exit. Cargo is stored in a segregated and monitored area to minimize the risk of theft, damage, or unauthorized handling. Access is limited to authorized personnel only, with proper documentation. This facility provides customers with additional security and protection for high-value shipments while they are in CFS custody.",
     },
 
     features: [

@@ -202,7 +202,7 @@ export const scenes = {
   // Virtual target for drawer selection and quick panel info
   highvaluecargo: {
     id: "highvaluecargo",
-    audio: "/audio/office_new.mp3",
+    audio: "/audio/HighValueCargoAudio.mp3",
     isVirtual: true,
     title: "High Value Cargo",
     description: "Secure Premium Cargo Vault",
