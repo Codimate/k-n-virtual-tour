@@ -186,7 +186,7 @@ export const scenes = {
     title: "Documentation Room",
     description: "Customs & Processing Center",
     image: "/panoramas/Documentationroomupdated.webp",
-    thumbnail: "/panoramas/thumbnails/Documentationroom_compressed.webp",
+    thumbnail: "/panoramas/Documentationroomupdated.webp",
     hotspots: [
       {
         id: "warehouse",
