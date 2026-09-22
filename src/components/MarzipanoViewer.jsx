@@ -21,6 +21,15 @@ export default function MarzipanoViewer({
   const autorotateRef = useRef(null);
   const isInteractingRef = useRef(false);
 
+  // State & Ref for Auto-Rotate Toggle (Defaults to true)
+  const [isAutorotateEnabled, setIsAutorotateEnabled] = useState(true);
+  const isAutorotateEnabledRef = useRef(isAutorotateEnabled);
+
+  // RESET Auto-Rotate to TRUE every time scene changes (Slide transition)
+  useEffect(() => {
+    setIsAutorotateEnabled(true);
+  }, [scene?.id]);
+
   // Determine active audio track
   const activeOverlayContent = overlayLocation ? locationContent[overlayLocation] : null;
   const overlayAudio =
@@ -53,16 +62,24 @@ export default function MarzipanoViewer({
     onSelectOverlayInfoRef.current = onSelectOverlayInfo;
   }, [onSceneChange, onInfoOpen, onSelectOverlayInfo]);
 
-  // Handle Scene / Overlay Narration Autoplay Logic (Only play once per audio track)
+  // Keep auto-rotate ref in sync and start/stop based on user toggle
+  useEffect(() => {
+    isAutorotateEnabledRef.current = isAutorotateEnabled;
+    if (isAutorotateEnabled) {
+      startRotation();
+    } else {
+      stopRotation();
+    }
+  }, [isAutorotateEnabled]);
+
+  // Handle Scene / Overlay Narration Autoplay Logic
   useEffect(() => {
     if (!currentAudioSrc) return;
 
     if (!visitedAudioRef.current.has(currentAudioSrc)) {
-      // First time visiting this audio file: allow autoplay and record track
       visitedAudioRef.current.add(currentAudioSrc);
       setShouldAutoPlayNarration(true);
     } else {
-      // Audio was already played on a previous visit: do not auto-play again
       setShouldAutoPlayNarration(false);
     }
   }, [currentAudioSrc, overlayLocation]);
@@ -128,12 +145,18 @@ export default function MarzipanoViewer({
     setIsMuted(newMuteState);
   };
 
+  // Toggle Auto-Rotation state for current slide
+  const toggleAutorotate = () => {
+    setIsAutorotateEnabled((prev) => !prev);
+  };
+
+  // Auto-rotation helpers
   const startRotation = () => {
     if (autorotateRef.current) return;
 
     const rotate = () => {
       const viewer = viewerInstanceRef.current;
-      if (viewer && !isInteractingRef.current) {
+      if (viewer && !isInteractingRef.current && isAutorotateEnabledRef.current) {
         const currentScene = viewer.scene();
         if (currentScene) {
           const view = currentScene.view();
@@ -174,7 +197,9 @@ export default function MarzipanoViewer({
 
       const handlePointerUp = () => {
         isInteractingRef.current = false;
-        startRotation();
+        if (isAutorotateEnabledRef.current) {
+          startRotation();
+        }
       };
 
       viewerElement.addEventListener("pointerdown", handlePointerDown);
@@ -296,7 +321,10 @@ export default function MarzipanoViewer({
 
     marzipanoScene.switchTo({ transitionDuration: 600 });
     isInteractingRef.current = false;
-    startRotation();
+
+    if (isAutorotateEnabledRef.current) {
+      startRotation();
+    }
 
     if (scene.id === "skyview") {
       const timer = setTimeout(() => {
@@ -349,15 +377,43 @@ export default function MarzipanoViewer({
         }}
       />
 
-      {/* Floating Mute/Unmute Button for Background Music */}
+      {/* Floating Control Buttons Container */}
       <div
         style={{
           position: "fixed",
           bottom: "90px",
           right: "20px",
           zIndex: 1000,
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
         }}
       >
+        {/* Toggle Auto-Rotate Button */}
+        <button
+          onClick={toggleAutorotate}
+          title={isAutorotateEnabled ? "Disable Auto-rotate" : "Enable Auto-rotate"}
+          style={{
+            width: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            backgroundColor: isAutorotateEnabled ? "#0056b3" : "#ffffff",
+            border: "1px solid #e2e8f0",
+            color: isAutorotateEnabled ? "#ffffff" : "#0056b3",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+            transition: "all 0.2s ease-in-out",
+          }}
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0020 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 004 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z" />
+          </svg>
+        </button>
+
+        {/* Toggle Background Music Button */}
         <button
           onClick={toggleMute}
           title={isMuted ? "Unmute Ambient Music" : "Mute Ambient Music"}
