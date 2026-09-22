@@ -185,7 +185,7 @@ export const scenes = {
     audio: "/audio/office_new.mp3",
     title: "Documentation Room",
     description: "Customs & Processing Center",
-    image: "/panoramas/Documentationroom_compressed.webp",
+    image: "/panoramas/Documentationroomupdated.webp",
     thumbnail: "/panoramas/thumbnails/Documentationroom_compressed.webp",
     hotspots: [
       {
