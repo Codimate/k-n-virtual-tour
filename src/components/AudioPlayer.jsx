@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function AudioPlayer({ audioSrc }) {
+export default function AudioPlayer({ audioSrc, autoPlay = true }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -12,39 +12,46 @@ export default function AudioPlayer({ audioSrc }) {
     audio.src = audioSrc;
     audio.currentTime = 0;
 
+    // If autoPlay is false, pause and don't attempt playback
+    if (!autoPlay) {
+      audio.pause();
+      setIsPlaying(false);
+      return;
+    }
+
     const attemptPlay = () => {
       audio
         .play()
         .then(() => {
           setIsPlaying(true);
-          console.log("Audio playing successfully:", audioSrc);
         })
         .catch((err) => {
           setIsPlaying(false);
-          console.warn("Audio playback issue:", err.message, "Path:", audioSrc);
+          console.warn("Autoplay prevented:", err.message);
         });
     };
 
     attemptPlay();
 
+    // Only retry on click IF autoPlay was intended and blocked by browser policy
     const handleFirstUserInteraction = () => {
-      if (audio.paused) {
+      if (audio.paused && autoPlay) {
         attemptPlay();
       }
-      window.removeEventListener("click", handleFirstUserInteraction);
     };
 
-    window.addEventListener("click", handleFirstUserInteraction);
+    window.addEventListener("click", handleFirstUserInteraction, { once: true });
 
     return () => {
       window.removeEventListener("click", handleFirstUserInteraction);
     };
-  }, [audioSrc]);
+  }, [audioSrc, autoPlay]);
 
   if (!audioSrc) return null;
 
   const togglePlay = () => {
     if (!audioRef.current) return;
+
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
@@ -66,7 +73,6 @@ export default function AudioPlayer({ audioSrc }) {
     <div style={styles.container}>
       <audio
         ref={audioRef}
-        loop
         onError={(e) => console.error("Audio file failed to load:", audioSrc, e)}
       />
 

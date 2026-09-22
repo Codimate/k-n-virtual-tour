@@ -89,6 +89,7 @@ export const scenes = {
         type: "scene",
         label: "High Value Cargo Space",
         target: "highvaluecargo",
+        audio: "/audio/office_new.mp3",
         yaw: 2.3,
         pitch: 0.12,
         targetYaw: 2.3,
@@ -201,6 +202,7 @@ export const scenes = {
   // Virtual target for drawer selection and quick panel info
   highvaluecargo: {
     id: "highvaluecargo",
+    audio: "/audio/office_new.mp3",
     isVirtual: true,
     title: "High Value Cargo",
     description: "Secure Premium Cargo Vault",

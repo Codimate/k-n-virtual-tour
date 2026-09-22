@@ -183,3 +183,47 @@
     max-height: 280px;
   }
 }
+
+.panel-video-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* Hide overlay by default, display on hover */
+.video-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.panel-video-wrapper:hover .video-hover-overlay {
+  opacity: 1;
+}
+
+/* Circle Button */
+.video-control-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e293b;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease;
+}
+
+.video-control-btn:hover {
+  transform: scale(1.1);
+  background: #ffffff;
+}

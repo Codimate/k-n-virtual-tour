@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import AudioPlayer from "../components/AudioPlayer";
 import Marzipano from "marzipano";
+import { locationContent } from "../data/locationContent";
+import { scenes } from "../data/scenes";
 import "../styles/hotspot.css";
 
-// 1. Path to your background music file
-const BACKGROUND_MUSIC_SRC = "/audio/corporateascent.mp3"; 
+// Path to background music file
+const BACKGROUND_MUSIC_SRC = "/audio/corporateascent.mp3";
 
 export default function MarzipanoViewer({
   scene,
@@ -18,6 +20,20 @@ export default function MarzipanoViewer({
   const scenesRef = useRef({});
   const autorotateRef = useRef(null);
   const isInteractingRef = useRef(false);
+
+  // Determine active audio track
+  const activeOverlayContent = overlayLocation ? locationContent[overlayLocation] : null;
+  const overlayAudio =
+    activeOverlayContent?.audio ||
+    activeOverlayContent?.audioSrc ||
+    scene?.overlays?.[overlayLocation]?.audio ||
+    scenes?.[overlayLocation]?.audio;
+
+  const currentAudioSrc = overlayLocation ? overlayAudio : scene?.audio;
+
+  // Visited audio tracker and autoplay flag for narration audio
+  const visitedAudioRef = useRef(new Set());
+  const [shouldAutoPlayNarration, setShouldAutoPlayNarration] = useState(true);
 
   // Background Music State & Refs
   const bgAudioRef = useRef(null);
@@ -37,11 +53,25 @@ export default function MarzipanoViewer({
     onSelectOverlayInfoRef.current = onSelectOverlayInfo;
   }, [onSceneChange, onInfoOpen, onSelectOverlayInfo]);
 
-  // 2. Initialize Background Audio & Fade-In Logic
+  // Handle Scene / Overlay Narration Autoplay Logic (Only play once per audio track)
+  useEffect(() => {
+    if (!currentAudioSrc) return;
+
+    if (!visitedAudioRef.current.has(currentAudioSrc)) {
+      // First time visiting this audio file: allow autoplay and record track
+      visitedAudioRef.current.add(currentAudioSrc);
+      setShouldAutoPlayNarration(true);
+    } else {
+      // Audio was already played on a previous visit: do not auto-play again
+      setShouldAutoPlayNarration(false);
+    }
+  }, [currentAudioSrc, overlayLocation]);
+
+  // Initialize Background Audio & Fade-In Logic
   useEffect(() => {
     const bgAudio = new Audio(BACKGROUND_MUSIC_SRC);
     bgAudio.loop = true;
-    bgAudio.volume = 0; // Start at 0 for fade-in effect
+    bgAudio.volume = 0;
     bgAudioRef.current = bgAudio;
 
     const playAudio = async () => {
@@ -49,7 +79,6 @@ export default function MarzipanoViewer({
         await bgAudio.play();
         fadeInMusic();
       } catch (err) {
-        // Autoplay policy fallback: play on first user click
         const handleUserInteract = () => {
           bgAudio.play().then(() => fadeInMusic());
           window.removeEventListener("click", handleUserInteract);
@@ -69,12 +98,11 @@ export default function MarzipanoViewer({
     };
   }, []);
 
-  // Smooth Fade-In Function (Target volume: 7%)
   const fadeInMusic = () => {
     if (!bgAudioRef.current) return;
     const targetVolume = 0.07;
     const step = 0.01;
-    const intervalTime = 100; // Adjusts over ~3 seconds
+    const intervalTime = 100;
 
     if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
 
@@ -93,7 +121,6 @@ export default function MarzipanoViewer({
     }, intervalTime);
   };
 
-  // Toggle Mute / Unmute
   const toggleMute = () => {
     if (!bgAudioRef.current) return;
     const newMuteState = !isMuted;
@@ -101,7 +128,6 @@ export default function MarzipanoViewer({
     setIsMuted(newMuteState);
   };
 
-  // 3. Auto-rotation helpers
   const startRotation = () => {
     if (autorotateRef.current) return;
 
@@ -129,7 +155,7 @@ export default function MarzipanoViewer({
     }
   };
 
-  // 4. Initialize Marzipano Viewer
+  // Initialize Marzipano Viewer
   useEffect(() => {
     if (!viewerRef.current) return;
 
@@ -167,7 +193,7 @@ export default function MarzipanoViewer({
     }
   }, []);
 
-  // 5. Load Scene & Setup Hotspots
+  // Load Scene & Setup Hotspots
   useEffect(() => {
     const viewer = viewerInstanceRef.current;
     if (!viewer || !scene) return;
@@ -297,7 +323,7 @@ export default function MarzipanoViewer({
     }
   }, [scene]);
 
-  // 6. Handle External Zoom Requests
+  // Handle External Zoom Requests
   useEffect(() => {
     if (overlayLocation === "highvaluecargo") {
       stopRotation();
@@ -323,7 +349,7 @@ export default function MarzipanoViewer({
         }}
       />
 
-      {/* Floating Mute/Unmute Button */}
+      {/* Floating Mute/Unmute Button for Background Music */}
       <div
         style={{
           position: "fixed",
@@ -363,7 +389,11 @@ export default function MarzipanoViewer({
       </div>
 
       {/* Voice Narrative Player */}
-      <AudioPlayer audioSrc={scene?.audio} />
+      <AudioPlayer
+        key={currentAudioSrc}
+        audioSrc={currentAudioSrc}
+        autoPlay={shouldAutoPlayNarration}
+      />
     </>
   );
 }
