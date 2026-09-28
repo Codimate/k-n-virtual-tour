@@ -25,7 +25,7 @@ export default function MarzipanoViewer({
   const [isAutorotateEnabled, setIsAutorotateEnabled] = useState(true);
   const isAutorotateEnabledRef = useRef(isAutorotateEnabled);
 
-  // RESET Auto-Rotate to TRUE every time scene changes (Slide transition)
+  // Reset Auto-Rotate to TRUE every time scene changes (Slide transition)
   useEffect(() => {
     setIsAutorotateEnabled(true);
   }, [scene?.id]);
@@ -39,10 +39,6 @@ export default function MarzipanoViewer({
     scenes?.[overlayLocation]?.audio;
 
   const currentAudioSrc = overlayLocation ? overlayAudio : scene?.audio;
-
-  // Visited audio tracker and autoplay flag for narration audio
-  const visitedAudioRef = useRef(new Set());
-  const [shouldAutoPlayNarration, setShouldAutoPlayNarration] = useState(true);
 
   // Background Music State & Refs
   const bgAudioRef = useRef(null);
@@ -71,18 +67,6 @@ export default function MarzipanoViewer({
       stopRotation();
     }
   }, [isAutorotateEnabled]);
-
-  // Handle Scene / Overlay Narration Autoplay Logic
-  useEffect(() => {
-    if (!currentAudioSrc) return;
-
-    if (!visitedAudioRef.current.has(currentAudioSrc)) {
-      visitedAudioRef.current.add(currentAudioSrc);
-      setShouldAutoPlayNarration(true);
-    } else {
-      setShouldAutoPlayNarration(false);
-    }
-  }, [currentAudioSrc, overlayLocation]);
 
   // Initialize Background Audio & Fade-In Logic
   useEffect(() => {
@@ -444,11 +428,11 @@ export default function MarzipanoViewer({
         </button>
       </div>
 
-      {/* Voice Narrative Player */}
+      {/* Voice Narrative Player (Plays 1 time on each visit, non-looping) */}
       <AudioPlayer
-        key={currentAudioSrc}
+        key={`${currentAudioSrc}-${overlayLocation || scene?.id}`}
         audioSrc={currentAudioSrc}
-        autoPlay={shouldAutoPlayNarration}
+        autoPlay={true}
       />
     </>
   );
