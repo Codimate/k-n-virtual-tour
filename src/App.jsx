@@ -4,7 +4,7 @@ import Tour from "./pages/Tour";
 import { scenes } from "./data/scenes";
 
 export default function App() {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(true);
   const [currentSceneId, setCurrentSceneId] = useState("warehouse");
 
   // Track key string (e.g., "highvaluecargo" or null when no overlay is active)
